@@ -1,0 +1,29 @@
+{
+  "name": "oficina-de-integracao-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./src/index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devrafasouza/Oficina-de-integracao-1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devrafasouza/Oficina-de-integracao-1/issues"
+  },
+  "homepage": "https://github.com/devrafasouza/Oficina-de-integracao-1#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.20",
+    "sequelize": "^6.25.4"
+  }
+}
