@@ -3,31 +3,35 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class Purchases extends Model {
+    class Language extends Model {
 
     }
-    Purchases.init({
-        id_purchase: {
+
+    Language.init({
+        id_language: {
           type: DataTypes.INTEGER,
           allowNull: false,
           autoIncrement: true,
           primaryKey: true,
         },
-        id_game: {
-          type: DataTypes.INTEGER,
+        enUS_name: {
+          type: DataTypes.STRING,
           allowNull: false,
         },
-        id_user: {
-          type: DataTypes.INTEGER,
+        native_name: {
+          type: DataTypes.STRING,
           allowNull: false,
         },
-        date: {
-            type: DataTypes.DATE,
+        ptBR_name: {
+            type: DataTypes.STRING,
             allowNull: false,
         },
     }, {
         sequelize,
-        modelName: 'Purchases',
+        modelName: 'Language',
+        updatedAt: false,
+        freezeTableName: true,
+        createdAt: false,
     });
-    return Purchases;
+    return Language;
 };

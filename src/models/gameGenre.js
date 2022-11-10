@@ -3,11 +3,11 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class CartItens extends Model {
+    class GameGenre extends Model {
 
     }
 
-    CartItens.init({
+    GameGenre.init({
       id_game: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -18,7 +18,10 @@ module.exports = (sequelize, DataTypes) => {
       },
     }, {
         sequelize,
-        modelName: 'CartItens',
+        modelName: 'GameGenre',
+        updatedAt: false,
+        freezeTableName: true,
+        createdAt: false,
     });
-    return CartItens;
+    return GameGenre;
 };

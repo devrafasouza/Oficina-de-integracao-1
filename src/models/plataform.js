@@ -3,11 +3,11 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class Plataforms extends Model {
+    class Plataform extends Model {
 
     }
 
-    Plataforms.init({
+    Plataform.init({
         id_platform: {
           type: DataTypes.INTEGER,
           allowNull: false,
@@ -20,7 +20,10 @@ module.exports = (sequelize, DataTypes) => {
         },
     }, {
         sequelize,
-        modelName: 'Plataforms',
+        modelName: 'Plataform',
+        updatedAt: false,
+        freezeTableName: true,
+        createdAt: false,
     });
-    return Plataforms;
+    return Plataform;
 };
