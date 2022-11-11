@@ -3,11 +3,15 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class GamesGenres extends Model {
-
+    class CartItem extends Model {
+      static associate(models) {
+        CartItem.belongsTo(models.User), {
+            foreignKey: 'id_user'
+        };
+      }
     }
 
-    GamesGenres.init({
+    CartItem.init({
       id_game: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -18,7 +22,10 @@ module.exports = (sequelize, DataTypes) => {
       },
     }, {
         sequelize,
-        modelName: 'GamesGenres',
+        modelName: 'CartItem',
+        updatedAt: false,
+        freezeTableName: true,
+        createdAt: false,
     });
-    return GamesGenres;
+    return CartItem;
 };

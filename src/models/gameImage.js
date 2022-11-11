@@ -3,26 +3,29 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class GamesPlataforms extends Model {
+    class GameImage extends Model {
 
     }
 
-    GamesPlataforms.init({
+    GameImage.init({
         id_game: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
-        id_plataform: {
-          type: DataTypes.INTEGER,
+        url: {
+          type: DataTypes.STRING,
           allowNull: false,
         },
-        onSale: {
-          type: DataTypes.BOOLEAN,
+        type: {
+          type: DataTypes.STRING,
           allowNull: false,
         },
     }, {
         sequelize,
-        modelName: 'GamesPlataforms',
+        modelName: 'GameImage',
+        updatedAt: false,
+        freezeTableName: true,
+        createdAt: false,
     });
-    return GamesPlataforms;
+    return GameImage;
 };

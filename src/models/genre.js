@@ -3,26 +3,25 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class GamesImages extends Model {
+    class Genre extends Model {
 
     }
 
-    GamesImages.init({
-        id_game: {
+    Genre.init({
+        id_genre: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
-        url: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
-        type: {
+        name: {
           type: DataTypes.STRING,
           allowNull: false,
         },
     }, {
         sequelize,
-        modelName: 'GamesImages',
+        modelName: 'Genre',
+        updatedAt: false,
+        freezeTableName: true,
+        createdAt: false,
     });
-    return GamesImages;
+    return Genre;
 };

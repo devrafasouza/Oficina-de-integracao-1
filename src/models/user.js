@@ -3,11 +3,11 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class Users extends Model {
+    class User extends Model {
 
     }
 
-    Users.init({
+    User.init({
         id_user: {
           type: DataTypes.INTEGER,
           allowNull: false,
@@ -41,9 +41,14 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.BOOLEAN,
           allowNull: false,
         },
+        
     }, {
         sequelize,
-        modelName: 'Users',
+        modelName: 'User',
+        updatedAt: false,
+        freezeTableName: true,
+        createdAt: false,
+
     });
-    return Users;
+    return User;
 };
