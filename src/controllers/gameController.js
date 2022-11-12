@@ -2,7 +2,7 @@ const database = require('../models');
 
 
 class gameController {
-  static async addGame(req, res) {
+  static async registerGame(req, res) {
     const newGame = req.body;
         try {
         const newGame = await database.Games.create(newGame); /* cria um novo jogo no banco com o metodo create do sequelize */
