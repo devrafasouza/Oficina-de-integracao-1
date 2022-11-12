@@ -47,12 +47,7 @@ static async findGame(req, res) {
 } catch (error) {
     return res.status(500).menssage("Falha ao deletar Game");
 }
-}
-
-
-
-
-}
+}}
 
 module.exports = GameController;
 
