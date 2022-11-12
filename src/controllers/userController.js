@@ -6,8 +6,8 @@ class UserController {
   static async registerUser(req, res) {
     const newUser = req.body;
     newUser.senha = await bcrypt.hash(newUser.senha, 12);
-    try {
-        
+    try {  
+              
         return res.status(200).json(newUser);
     } catch (error) {
         return res.status(500).json(error.message);
