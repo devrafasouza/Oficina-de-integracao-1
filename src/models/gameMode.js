@@ -3,11 +3,13 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class GamesMode extends Model {
-
+    class Gamemode extends Model {
+      static associate(models) {
+        Gamemode.hasMany(models.Game_gamemode), {};
+      }
     }
 
-    GamesMode.init({
+    Gamemode.init({
       id_gamemode: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -19,10 +21,10 @@ module.exports = (sequelize, DataTypes) => {
       },
     }, {
         sequelize,
-        modelName: 'GamesMode',
+        modelName: 'Gamemode',
         updatedAt: false,
         freezeTableName: true,
         createdAt: false,
     });
-    return GamesMode;
+    return Gamemode;
 };

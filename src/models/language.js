@@ -4,7 +4,9 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class Language extends Model {
-
+      static associate(models) {
+        Language.hasMany(models.Game_language_support), {};
+      }
     }
 
     Language.init({
