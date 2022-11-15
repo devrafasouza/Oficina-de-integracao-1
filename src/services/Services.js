@@ -9,11 +9,11 @@ class Services {
     this.nameModel = nameModel;
   }
 
-  async pegaTodosOsRegistros() {
+  async getAllRegisters() {
     return database[this.nameModel].findAll();
   }
 
-  async pegaUmRegistro(id) {
+  async getRegister(id) {
     return database[this.nameModel].findOne({ where: { id: id }});
   }
 
@@ -27,7 +27,7 @@ class Services {
       .update(date, { where: { id: id }}); /* atualiza as informações de um usuario com as novas informações */
   }
 
-  async apagaRegistro(id) {
+  async deleteRegister(id) {
     return database[this.nameModel]
       .destroy({ where: { id: id }});
   }
