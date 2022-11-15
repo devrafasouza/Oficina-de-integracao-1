@@ -4,17 +4,20 @@ const database = require('../models');
 class GameController {
   static async registerGame(req, res) {
     const newGame = req.body;
-        try {
-        const newGame = await database.Games.create(newGame); /* cria um novo jogo no banco com o metodo create do sequelize */
-        return res.status(200).menssage("jogo Inserido com sucesso");
+    //newUser.password = await bcrypt.hash(newUser.password, 12);
+    try {
+        const newGameItem = await database.Game.create(newGame); /* cria um novo jogo no banco com o metodo create do sequelize */
+        return res.status(200).menssage(newGameItem);
     } catch (error) {
-        return res.status(500).menssage("Falha ao inserir Game");
+        return res.status(500).menssage(error.menssage); //"Falha ao inserir Game");
     }
 }
+}
+/*
 static async updateGame(req, res) { 
     const updateGame = req.body;       
         try {
-        const newGame = await database.Games.save(updateGame); 
+        const newGame = await database.Game.save(updateGame); 
         return res.status(200).menssage("jogo Atualizado com sucesso");
     } catch (error) {
         return res.status(500).menssage("Falha ao atualizar Game");
@@ -47,7 +50,7 @@ static async findGame(req, res) {
 } catch (error) {
     return res.status(500).menssage("Falha ao deletar Game");
 }
-}}
+}}*/ 
 
 module.exports = GameController;
 

@@ -5,15 +5,15 @@ const jsonwebtoken = require('jsonwebtoken');
 class UserController {
   static async registerUser(req, res) {
     const newUser = req.body;
-    newUser.senha = await bcrypt.hash(newUser.senha, 12);
-    try {  
+    newUser.password = await bcrypt.hash(newUser.password, 12);
+    try { 
+        const newUserSite  = await database.User.create(newUser);
               
-        return res.status(200).json(newUser);
+        return res.status(200).json(newUserActive);
     } catch (error) {
         return res.status(500).json(error.message);
     }
 }
-
 }
 
 module.exports = UserController;
