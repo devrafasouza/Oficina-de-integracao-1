@@ -1,10 +1,14 @@
+const { where } = require('sequelize');
 const database = require('../models');
+//const Op = Sequelize.Op
 
 
 class GameController {
+
+
+  //Registrar Jogo  
   static async registerGame(req, res) {
-    const newGame = req.body;
-    //newUser.password = await bcrypt.hash(newUser.password, 12);
+    const newGame = req.body;    
     try {
         const newGameItem = await database.Game.create(newGame); /* cria um novo jogo no banco com o metodo create do sequelize */
         return res.status(200).json(newGameItem);
@@ -12,32 +16,33 @@ class GameController {
         return res.status(500).json(error.message); //"Falha ao inserir Game");
     }
 }
+
+    //Atualizar Jogo
+static async updateGame(req, res) { 
+    const updateGame = req.body;   
+        try {
+        const updateGameItem = await database.Game.update(updateGame,{ where: {id_game:updateGame.id_game}});      
+        
+        return res.status(200).json(updateGameItem);
+    } catch (error) {
+        return res.status(500).json(error.message);//"Falha ao atualizar Game");
+    }
+}
+
+    //Deletar Jogo
+static async deleteGame(req, res) {
+    const deleteGame = req.body;    
+        try {
+        const deleteGameItem = await database.Game.destroy({where:{id_game: deleteGame.id_game}});      
+        
+        return res.status(200).json(deleteGameItem);
+    } catch (error) {
+        return res.status(500).json(error.message);//"Falha ao deletar Game");
+    }
+}
+
 }
 /*
-static async updateGame(req, res) { 
-    const updateGame = req.body;       
-        try {
-        const newGame = await database.Game.save(updateGame); 
-        return res.status(200).menssage("jogo Atualizado com sucesso");
-    } catch (error) {
-        return res.status(500).menssage("Falha ao atualizar Game");
-    }
-}
-
-static async deleteGame(req, res) {
-        const deleteGame = req.body;
-        try {
-        const deleteGame = await database.Games.destroy({
-            where:{
-                deleteGame
-            }
-        });
-        return res.status(200).menssage("jogo Deletado");
-    } catch (error) {
-        return res.status(500).menssage("Falha ao deletar Game");
-    }
-}
-
 static async findGame(req, res) {
     const findGame = req.body;
     try {
