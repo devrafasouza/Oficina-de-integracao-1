@@ -3,11 +3,13 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class Plataform extends Model {
-
+    class Platform extends Model {
+        static associate(models) {
+            Platform.hasMany(models.Game_platform), {};
+          }
     }
 
-    Plataform.init({
+    Platform.init({
         id_platform: {
           type: DataTypes.INTEGER,
           allowNull: false,
@@ -20,10 +22,12 @@ module.exports = (sequelize, DataTypes) => {
         },
     }, {
         sequelize,
-        modelName: 'Plataform',
+
+        modelName: 'Platform',
         updatedAt: false,
         freezeTableName: true,
         createdAt: false,
     });
-    return Plataform;
+    return Platform;
+
 };

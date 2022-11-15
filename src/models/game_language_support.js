@@ -3,11 +3,18 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class GameLanguageSupport extends Model {
-
+    class Game_language_support extends Model {
+      static associate(models) {
+        Game_language_support.belongsTo(models.Game), {
+            foreignKey: 'id_game'
+        };
+        Game_language_support.belongsTo(models.Language), {
+          foreignKey: 'id_language'
+      };
+      }
     }
 
-    GameLanguageSupport.init({
+    Game_language_support.init({
         id_game: {
           type: DataTypes.INTEGER,
           allowNull: false,
@@ -30,10 +37,10 @@ module.exports = (sequelize, DataTypes) => {
         },
     }, {
         sequelize,
-        modelName: 'GameLanguageSupport',
+        modelName: 'Game_language_support',
         updatedAt: false,
         freezeTableName: true,
         createdAt: false,
     });
-    return GameLanguageSupport;
+    return Game_language_support;
 };

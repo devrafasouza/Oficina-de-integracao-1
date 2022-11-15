@@ -3,11 +3,15 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class GameImage extends Model {
-
+    class Game_image extends Model {
+      static associate(models) {
+        Game_image.belongsTo(models.Game), {
+            foreignKey: 'id_game'
+        };
+      }
     }
 
-    GameImage.init({
+    Game_image.init({
         id_game: {
           type: DataTypes.INTEGER,
           allowNull: false,
@@ -22,10 +26,10 @@ module.exports = (sequelize, DataTypes) => {
         },
     }, {
         sequelize,
-        modelName: 'GameImage',
+        modelName: 'Game_image',
         updatedAt: false,
         freezeTableName: true,
         createdAt: false,
     });
-    return GameImage;
+    return Game_image;
 };

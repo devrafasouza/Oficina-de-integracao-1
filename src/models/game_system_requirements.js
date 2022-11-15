@@ -3,11 +3,15 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class GameSystemRequirements extends Model {
-
+    class Game_system_requirements extends Model {
+        static associate(models) {
+            Game_system_requirements.belongsTo(models.Game), {
+                foreignKey: 'id_game'
+            };
+          }
     }
 
-    GameSystemRequirements.init({
+    Game_system_requirements.init({
         id_game: {
           type: DataTypes.INTEGER,
           allowNull: false,
@@ -50,10 +54,10 @@ module.exports = (sequelize, DataTypes) => {
         },
     }, {
         sequelize,
-        modelName: 'GameSystemRequirements',
+        modelName: 'Game_system_requirements',
         updatedAt: false,
         freezeTableName: true,
         createdAt: false,
     });
-    return GameSystemRequirements;
+    return Game_system_requirements;
 };

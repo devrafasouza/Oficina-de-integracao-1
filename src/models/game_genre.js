@@ -3,25 +3,32 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class GameGameMode extends Model {
-
+    class Game_genre extends Model {
+      static associate(models) {
+        Game_genre.belongsTo(models.Game), {
+            foreignKey: 'id_game'
+        };
+        Game_genre.belongsTo(models.Genre), {
+          foreignKey: 'id_genre'
+      };
+      }
     }
 
-    GameGameMode.init({
+    Game_genre.init({
       id_game: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      id_gamemode: {
+      id_genre: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
     }, {
         sequelize,
-        modelName: 'GameGameMode',
+        modelName: 'Game_genre',
         updatedAt: false,
         freezeTableName: true,
         createdAt: false,
     });
-    return GameGameMode;
+    return Game_genre;
 };

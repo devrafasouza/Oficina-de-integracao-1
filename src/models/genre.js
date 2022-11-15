@@ -4,7 +4,9 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class Genre extends Model {
-
+      static associate(models) {
+        Genre.hasMany(models.Game_genre), {};
+      }
     }
 
     Genre.init({

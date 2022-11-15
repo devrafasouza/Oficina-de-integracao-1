@@ -3,11 +3,22 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class GamePlataform extends Model {
+    class Game_platform extends Model {
+      static associate(models) {
+        Game_platform.belongsTo(models.User), {
+            foreignKey: 'id_user'
+        };
+        Game_platform.belongsTo(models.Game), {
+          foreignKey: 'id_game'
+        };
+        Game_platform.belongsTo(models.Platform), {
+          foreignKey: 'id_plataform'
+        };
 
+      }
     }
 
-    GamePlataform.init({
+    Game_platform.init({
         id_game: {
           type: DataTypes.INTEGER,
           allowNull: false,
@@ -22,10 +33,10 @@ module.exports = (sequelize, DataTypes) => {
         },
     }, {
         sequelize,
-        modelName: 'GamePlataform',
+        modelName: 'Game_platform',
         updatedAt: false,
         freezeTableName: true,
         createdAt: false,
     });
-    return GamePlataform;
+    return Game_platform;
 };
