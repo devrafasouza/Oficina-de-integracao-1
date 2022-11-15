@@ -1,37 +1,58 @@
-const database = require('../models');
-const bcrypt = require('bcrypt');
-const jsonwebtoken = require('jsonwebtoken');
+const { UserServices } = require('../services');
+const userServices = new UserServices();
 
 class UserController {
-  static async registerUser(req, res) {
-    const newUser = req.body;
-    newUser.password = await bcrypt.hash(newUser.password, 12);
-    try {
-        const newUserTeste = await database.User.create(newUser); /* cria um novo usuario no banco com o metodo create do sequelize */
-        return res.status(200).json(newUserTeste);
-    } catch (error) {
-        return res.status(500).json(error.message);
+    static async registerUser(req, res) {
+        const newUser = req.body;
+        newUser.password = await userServices.hashPassword(newUser.password, 12);
+        try {
+            const newUserTeste = await userServices.userRegister(newUser)
+            /* cria um novo usuario no banco com o metodo create do sequelize */
+            return res.status(200).json(newUserTeste);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
     }
-}
     static async loginUser(req, res) {
         const { email, password } = req.body;
 
         try {
-            const usuarioValido = await database.User.findOne({
+            const userValid = await userServices.loginUser(email);
+            if (!userValid) {
+                throw new Error("Email ou senha invalida!");
+            }
+            const passwordValid = await userServices.compareHash(password, userValid.password);
+            if (!passwordValid) {
+                throw new Error("Email ou senha invalida!");
+            }
+            const token = await userServices.createToken(userValid.id);
+
+            return res.status(200).json(token);
+
+
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+    static async purchaseUser(req, res) {
+        const { id_user, id_game } = req.params;
+
+        try {
+            const userValid = await database.User.findOne({
                 where: {
                     email: email
                 }
             });
-            console.log(usuarioValido.id)
-            if (!usuarioValido) {
+            if (!userValid) {
                 throw new Error("Email ou senha invalida!");
             }
-            const senhaValida = await bcrypt.compare(senha, usuarioValido.senha);
-            if (!senhaValida) {
+            const passwordValid = await bcrypt.compare(password, userValid.password);
+            if (!passwordValid) {
                 throw new Error("Email ou senha invalida!");
             }
             const token = jsonwebtoken.sign({}, "5f4dcc3b5aa765d61d8327deb882cf99", {
-                subject: String(usuarioValido.id),
+                subject: String(userValid.id),
                 expiresIn: "1d"
             });
 
@@ -41,21 +62,7 @@ class UserController {
         } catch (error) {
             return res.status(500).json(error.message);
         }
-
     }
-    static async testeUser(req, res) {
-        const teste = await database.User.create()({
-        name: "My super User"
-        })
-        .then((newUser) => {
-        // The get() function allows you to recover only the DataValues of the object
-        console.log(newUser.get())
-        })
-        .catch((err) => {
-            return res.status(500).json(err); 
-        })
-
-    }    
 
 }
 
