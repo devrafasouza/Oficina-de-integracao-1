@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      id_genre: {
+      id_user: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
