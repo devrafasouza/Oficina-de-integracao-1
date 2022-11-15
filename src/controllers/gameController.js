@@ -7,9 +7,9 @@ class GameController {
     //newUser.password = await bcrypt.hash(newUser.password, 12);
     try {
         const newGameItem = await database.Game.create(newGame); /* cria um novo jogo no banco com o metodo create do sequelize */
-        return res.status(200).menssage(newGameItem);
+        return res.status(200).json(newGameItem);
     } catch (error) {
-        return res.status(500).menssage(error.menssage); //"Falha ao inserir Game");
+        return res.status(500).json(error.message); //"Falha ao inserir Game");
     }
 }
 }
