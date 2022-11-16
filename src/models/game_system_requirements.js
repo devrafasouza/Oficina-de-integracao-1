@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     class Game_system_requirements extends Model {
         static associate(models) {
             Game_system_requirements.belongsTo(models.Game), {
-                foreignKey: 'id_game'
+                foreignKey: 'id_game',
+                constraint: true,
             };
           }
     }
@@ -15,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         id_game: {
           type: DataTypes.INTEGER,
           allowNull: false,
+          references: 'Game'
         },
         type: {
             type: DataTypes.STRING,

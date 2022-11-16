@@ -6,9 +6,11 @@ module.exports = (sequelize, DataTypes) => {
     class Purchase extends Model {
       static associate(models) {
         Purchase.belongsTo(models.User), {
+            constraint: true,
             foreignKey: 'id_user'
         };
         Purchase.belongsTo(models.Game), {
+          constraint: true,
           foreignKey: 'id_game'
       };
       }
@@ -23,10 +25,12 @@ module.exports = (sequelize, DataTypes) => {
         id_game: {
           type: DataTypes.INTEGER,
           allowNull: false,
+          references: 'Game'
         },
         id_user: {
           type: DataTypes.INTEGER,
           allowNull: false,
+          references: 'User'
         },
         date: {
             type: DataTypes.DATE,

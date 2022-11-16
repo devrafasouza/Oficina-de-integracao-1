@@ -6,10 +6,12 @@ module.exports = (sequelize, DataTypes) => {
     class Cart_item extends Model {
       static associate(models) {
         Cart_item.belongsTo(models.User), {
-            foreignKey: 'id_user'
+            foreignKey: 'id_user',
+            constraint: true,
         };
         Cart_item.belongsTo(models.Game), {
-          foreignKey: 'id_game'
+          foreignKey: 'id_game',
+          constraint: true,
       };
       }
     }
@@ -18,10 +20,12 @@ module.exports = (sequelize, DataTypes) => {
       id_game: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: 'Game'
       },
       id_user: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: 'User'
       },
     }, {
         sequelize,
