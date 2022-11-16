@@ -8,8 +8,12 @@ class GameController {
 static async registerGame(req, res) {
     const newGame = req.body;    
     try {
-        const newGameItem = await database.Game.create(newGame); /* cria um novo jogo no banco com o metodo create do sequelize */
-        return res.status(200).json(newGameItem);
+        const game = await database.Game.create(newGame); /* cria um novo jogo no banco com o metodo create do sequelize */
+        const data = {
+            game,
+            message: "Game cadastrado com sucesso"
+        }
+        return res.status(200).json(data);
     } catch (error) {
         return res.status(500).json(error.message); //"Falha ao inserir Game");
     }
@@ -19,51 +23,65 @@ static async registerGame(req, res) {
 static async updateGame(req, res) { 
     const updateGame = req.body;   
         try {
-        const updateGameItem = await database.Game.update(updateGame,{ 
+        const game = await database.Game.update(updateGame,{ 
             where: {id_game:updateGame.id_game
-            }});      
-              return res.status(200).json(updateGameItem);
+            }});
+            const data = {
+                game,
+                message: "Game Atualizado com sucesso"
+            }         
+              return res.status(200).json(data);
     } catch (error) {
         return res.status(500).json(error.message);//"Falha ao atualizar Game");
     }
 }
 
-    //Deletar Jogo
+    //Deletar Jogo    
 static async deleteGame(req, res) {
     const deleteGame = req.body;    
         try {
         const deleteGameItem = await database.Game.destroy({
-            where:{id_game: deleteGame.id_game}});     
-        return res.status(200).json(deleteGameItem);
+            where:{id_game: deleteGame.id_game}});
+            const data = {
+                deleteGameItem,
+                message: "Game Deletado com sucesso"
+            }       
+        return res.status(200).json(data);
     } catch (error) {
         return res.status(500).json(error.message);//"Falha ao deletar Game");
     }
 }
-//Encontrar Jogo
+//Encontrar Jogo Especifico
 static async findGame(req, res) {
-    const findGame= req.body; //Body acha o jogo por nome extato
+    const findGame= req.body;
     try {
-    const findGameItem = await database.Game.findOne({
+    const GameItem = await database.Game.findOne({
         where:{
             name: findGame.name           
+        }});
+        const data = {
+            GameItem,
+            message: "Game Encontrado com sucesso"
         }
-    });
-    return res.status(200).json(findGameItem);
+    return res.status(200).json(data);
 } catch (error) {
     return res.status(500).json(error.message);
 }}
 
 //Encontrar Jogos
-
 static async findGames(req, res) {
-    const findGame= req.body;     //Body acha o jogo por nome    
+    const findGames= req.body;     //Body acha o jogo por nome    
     try {
-    const findGameItem = await database.Game.findAll({
+    const GameItens = await database.Game.findAll({
         where:{
-            name:{[Op.like]: '%'+findGame.name+'%'  }             
+            name:{[Op.like]: '%'+findGames.name+'%'  }             
         }
     });
-    return res.status(200).json(findGameItem);
+    const data = {
+        GameItens,
+        message: "Games Encontrados com sucesso"
+    }
+    return res.status(200).json(data);
 } catch (error) {
     return res.status(500).json(error.message);
 }}
@@ -72,12 +90,16 @@ static async findGames(req, res) {
 static async findGameGenre(req, res) {
     const findGameGenre = req.body; //Body acha o jogo por nome
     try {
-    const findGame = await database.Genre.findAll({
+    const GameItens = await database.Genre.findAll({
         where:{
             id_genre:{ [Op.ne]:findGameGenre.id_genre  }            
         },include:database.Game
     });
-    return res.status(200).json(findGame);
+    const data = {
+        GameItens,
+        message: "Games Encontrados por Genero com sucesso"
+    }
+    return res.status(200).json(data);
 } catch (error) {
     return res.status(500).json(error.message);
 }
