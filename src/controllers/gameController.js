@@ -1,12 +1,11 @@
-const { where } = require('sequelize');
 const database = require('../models');
-const Op = require('sequelize');
+const { Op } = require("sequelize");
+
 
 class GameController {
 
-
   //Registrar Jogo  
-  static async registerGame(req, res) {
+static async registerGame(req, res) {
     const newGame = req.body;    
     try {
         const newGameItem = await database.Game.create(newGame); /* cria um novo jogo no banco com o metodo create do sequelize */
@@ -61,7 +60,7 @@ static async findGames(req, res) {
     try {
     const findGameItem = await database.Game.findAll({
         where:{
-            name:{[Op.like]: '%'+findGame.name +'%'   } 
+            name:{[Op.like]: '%'+findGame.name+'%'  }             
         }
     });
     return res.status(200).json(findGameItem);
@@ -73,9 +72,10 @@ static async findGames(req, res) {
 static async findGameGenre(req, res) {
     const findGameGenre = req.body; //Body acha o jogo por nome
     try {
-    const findGame = await database.Game_Genre.findAll({
+    const findGame = await database.Game_genre.findAll({
         where:{
-            genre:findGameGenre.genre      
+            "id_genre":findGameGenre.id_genre 
+                
         }
     });
     return res.status(200).json(findGame);
