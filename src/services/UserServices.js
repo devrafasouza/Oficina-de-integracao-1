@@ -39,6 +39,10 @@ class UserServices extends Services {
 
   }
 
+  async getRegister(id_user) {
+    return database[this.nameModel].findOne({ where: { id_user: id_user }});
+  }
+
 
 }
 
