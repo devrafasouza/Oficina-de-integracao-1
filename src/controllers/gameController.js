@@ -74,7 +74,7 @@ static async findGameGenre(req, res) {
     try {
     const findGame = await database.Genre.findAll({
         where:{
-            id_genre:findGameGenre.id_genre              
+            id_genre:{ [Op.ne]:findGameGenre.id_genre  }            
         },include:database.Game
     });
     return res.status(200).json(findGame);
