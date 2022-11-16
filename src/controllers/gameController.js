@@ -72,11 +72,10 @@ static async findGames(req, res) {
 static async findGameGenre(req, res) {
     const findGameGenre = req.body; //Body acha o jogo por nome
     try {
-    const findGame = await database.Game_genre.findAll({
+    const findGame = await database.Genre.findAll({
         where:{
-            "id_genre":findGameGenre.id_genre 
-                
-        }
+            id_genre:{[Op.in]:findGameGenre.id_genre }              
+        },include:database.Game
     });
     return res.status(200).json(findGame);
 } catch (error) {
