@@ -1,6 +1,13 @@
 const UserServices = require('./UserServices.js');
+const Services = require('./Services.js');
+const PurchaseServices = require('./PurchaseServices.js');
+const GameServices = require('./GameServices.js');
 
 module.exports = {
-  UserServices: UserServices,
+  UserServices,
+  Services,
+  PurchaseServices,
+  GameServices,
+
 
 }
