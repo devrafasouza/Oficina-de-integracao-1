@@ -41,6 +41,7 @@ static async deleteGame(req, res) {
     const deleteGame = req.body;    
         try {
         const deleteGameItem = await database.Game.destroy({
+            truncate: { cascade: false }, 
             where:{id_game: deleteGame.id_game}});
             const data = {
                 deleteGameItem,
