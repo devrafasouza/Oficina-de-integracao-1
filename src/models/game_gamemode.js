@@ -6,10 +6,12 @@ module.exports = (sequelize, DataTypes) => {
     class Game_gamemode extends Model {
       static associate(models) {
         Game_gamemode.belongsTo(models.Game), {
-            foreignKey: 'id_game'
+            foreignKey: 'id_game',
+            constraint: true,
         };
         Game_gamemode.belongsTo(models.Gamemode), {
-          foreignKey: 'id_gamemode'
+          foreignKey: 'id_gamemode',
+          constraint: true,
       };
       }
     }
@@ -18,10 +20,12 @@ module.exports = (sequelize, DataTypes) => {
       id_game: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: 'Game'
       },
       id_gamemode: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: 'Gamemode'
       },
     }, {
         sequelize,

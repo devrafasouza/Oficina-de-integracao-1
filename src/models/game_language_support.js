@@ -6,10 +6,12 @@ module.exports = (sequelize, DataTypes) => {
     class Game_language_support extends Model {
       static associate(models) {
         Game_language_support.belongsTo(models.Game), {
-            foreignKey: 'id_game'
+            foreignKey: 'id_game',
+            constraint: true,
         };
         Game_language_support.belongsTo(models.Language), {
-          foreignKey: 'id_language'
+          foreignKey: 'id_language',
+          constraint: true,
       };
       }
     }
@@ -18,10 +20,12 @@ module.exports = (sequelize, DataTypes) => {
         id_game: {
           type: DataTypes.INTEGER,
           allowNull: false,
+          references: 'Game'
         },
         id_language: {
             type: DataTypes.STRING,
             allowNull: false,
+            references: 'Language'
         },
         interface: {
           type: DataTypes.BOOLEAN,

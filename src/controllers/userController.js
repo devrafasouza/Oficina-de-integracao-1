@@ -1,14 +1,19 @@
-const { UserServices } = require('../services');
+const { UserServices, GameServices, PurchaseServices } = require('../services');
 const userServices = new UserServices();
+const gameServices = new GameServices();
+const purchaseServices = new PurchaseServices();
 
 class UserController {
     static async registerUser(req, res) {
         const newUser = req.body;
-        newUser.password = await userServices.hashPassword(newUser.password, 12);
+        newUser.password = await userServices.hashPassword(newUser, 12);
         try {
-            const newUserTeste = await userServices.userRegister(newUser)
-            /* cria um novo usuario no banco com o metodo create do sequelize */
-            return res.status(200).json(newUserTeste);
+            const user = await userServices.createRegister(newUser) /* cria um novo usuario no banco com o metodo create do sequelize */
+            const data = {
+                user,
+                message: "Usuário cadastrado com sucesso"
+            }
+            return res.status(200).json(data);
         } catch (error) {
             return res.status(500).json(error.message);
         }
@@ -27,8 +32,13 @@ class UserController {
             }
             const token = await userServices.createToken(userValid.id);
 
-            return res.status(200).json(token);
+            const data = {
+                user: userValid,
+                token,
+                message: "Usuário logado com sucesso"
+            }
 
+            return res.status(200).json(data);
 
         } catch (error) {
             return res.status(500).json(error.message);
@@ -36,31 +46,26 @@ class UserController {
     }
 
     static async purchaseUser(req, res) {
-        const { id_user, id_game } = req.params;
+        const { id_user } = req.params;
+        const { id_game } = req.body;
+
 
         try {
-            const userValid = await database.User.findOne({
-                where: {
-                    email: email
-                }
-            });
-            if (!userValid) {
-                throw new Error("Email ou senha invalida!");
+            const userPurchase = await userServices.getRegister(id_user);
+            const gameValid = await gameServices.getRegister(id_game);
+            const purchase = {
+                id_game: gameValid.id_game,
+                id_user: userPurchase.id_user,
+                date: '2008-11-11'
             }
-            const passwordValid = await bcrypt.compare(password, userValid.password);
-            if (!passwordValid) {
-                throw new Error("Email ou senha invalida!");
-            }
-            const token = jsonwebtoken.sign({}, "5f4dcc3b5aa765d61d8327deb882cf99", {
-                subject: String(userValid.id),
-                expiresIn: "1d"
-            });
+            const newPurchase = await purchaseServices.createRegister(purchase);
 
-            return res.status(200).json(token);
+            return res.status(200).json(newPurchase);
 
 
         } catch (error) {
-            return res.status(500).json(error.message);
+            
+            return res.status(500).json(error);
         }
     }
 
