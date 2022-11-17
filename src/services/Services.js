@@ -19,7 +19,6 @@ class Services {
 
   async createRegister(date) {
     return database[this.nameModel].create(date); /* cria um novo usuario no banco com o metodo create do sequelize */
-
   }
 
   async updateRegister(date, id) {
@@ -29,7 +28,7 @@ class Services {
 
   async deleteRegister(id) {
     return database[this.nameModel]
-      .destroy({ where: { id: id }});
+      .destroy({ where: { id:id }});
   }
 
 }

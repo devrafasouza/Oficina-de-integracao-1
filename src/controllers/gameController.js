@@ -28,35 +28,32 @@ static async registerGame(req, res) {
 static async updateGame(req, res) { 
     const updateGame = req.body;   
         try {
-        const game = await database.Game.update(updateGame,{ 
-            where: {id_game:updateGame.id_game
-            }});
+        const game = await gameServices.updateRegister(updateGame,updateGame.id_game);
             const data = {
                 game,
                 message: "Game Atualizado com sucesso"
             }         
               return res.status(200).json(data);
     } catch (error) {
-        return res.status(500).json(error.message);//"Falha ao atualizar Game");
+        return res.status(500).json(error.message);
     }
 }
 
-    //Deletar Jogo    
+//Deletar Jogo   //Problema de FK
 static async deleteGame(req, res) {
     const deleteGame = req.body;    
         try {
-        const deleteGameItem = await database.Game.destroy({
-            truncate: { cascade: false }, 
-            where:{id_game: deleteGame.id_game}});
+        const deleteGameItem = await gameServices.deleteRegister(deleteGame.id_game);
             const data = {
-                deleteGameItem,
+                deleteGameItem,        
                 message: "Game Deletado com sucesso"
             }       
         return res.status(200).json(data);
     } catch (error) {
-        return res.status(500).json(error.message);//"Falha ao deletar Game");
+        return res.status(500).json(error.message);
     }
 }
+
 //Encontrar Jogo Especifico
 static async findGame(req, res) {
     const findGame= req.body;
