@@ -68,6 +68,8 @@ static async deleteGame(req, res) {
     }
 }
 
+
+
 //Encontrar Jogo Especifico ID
 static async findGameID(req, res) {
     const findGame= req.body;
@@ -81,6 +83,7 @@ static async findGameID(req, res) {
 } catch (error) {
     return res.status(500).json(error.message);
 }}
+
 //Encontrar Jogo Especifico Name
 static async findGameName(req, res) {
     const findGame= req.body;

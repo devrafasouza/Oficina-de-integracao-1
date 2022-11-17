@@ -13,8 +13,8 @@ class Services {
     return database[this.nameModel].findAll();
   }
 
-  async getRegisterID(id) {
-    return database[this.nameModel].findOne({ where: { id: id }});
+  async getRegisterID(info) {
+    return database[this.nameModel].findOne({ where:{[Op.or]: [{id_game: info}, {name: info}]}})
   }
 
   async getRegisterName(id) {

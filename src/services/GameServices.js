@@ -12,9 +12,9 @@ class GameServices extends Services {
     return database[this.nameModel].create(newGame); 
 
   }  
-  async getRegister(id_game) {
+  async getRegister(info) {
     return database[this.nameModel].findOne({ 
-      where: { id_game: id_game 
+      where: {[Op.or]: [{id_game: info}, {name: info}]
       }});
   }
 
