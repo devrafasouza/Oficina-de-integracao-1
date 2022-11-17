@@ -1,10 +1,10 @@
 const database = require('../models');
 const { Op } = require("sequelize");
 
-const { DataServices , UserServices, GameServices, PurchaseServices } = require('../services');
-const userServices = new UserServices();
+const {GameServices} = require('../services');
+
 const gameServices = new GameServices();
-const purchaseServices = new PurchaseServices();
+
 
 
 class GameController {
@@ -38,6 +38,20 @@ static async updateGame(req, res) {
         return res.status(500).json(error.message);
     }
 }
+    //Desativar Jogo
+static async inactivateGame(req, res) { 
+    const statusGame = req.body;   
+        try {
+        const game = await gameServices.updateRegister(statusGame,statusGame.id_game);
+            const data = {
+                game,
+                message: "Game Desativado com sucesso"
+            }         
+                return res.status(200).json(data);
+    } catch (error) {
+        return res.status(500).json(error.message);
+    }
+}
 
 //Deletar Jogo   //Problema de FK
 static async deleteGame(req, res) {
@@ -54,36 +68,28 @@ static async deleteGame(req, res) {
     }
 }
 
-//Encontrar Jogo Especifico
-static async findGame(req, res) {
+//Encontrar Jogo Especifico ID
+static async findGameID(req, res) {
     const findGame= req.body;
     try {
-    const GameItem = await database.Game.findOne({
-        where:{
-            name: findGame.name           
-        }});
+    const findGameItem = await gameServices.getRegister(findGame.id_game)
         const data = {
-            GameItem,
+            findGameItem,
             message: "Game Encontrado com sucesso"
         }
     return res.status(200).json(data);
 } catch (error) {
     return res.status(500).json(error.message);
 }}
-
-//Encontrar Jogos
-static async findGames(req, res) {
-    const findGames= req.body;     //Body acha o jogo por nome    
+//Encontrar Jogo Especifico Name
+static async findGameName(req, res) {
+    const findGame= req.body;
     try {
-    const GameItens = await database.Game.findAll({
-        where:{
-            name:{[Op.like]: '%'+findGames.name+'%'  }             
+    const findGameItem = await gameServices.getRegisterName(findGame.name)
+        const data = {
+            findGameItem,
+            message: "Game Encontrado com sucesso"
         }
-    });
-    const data = {
-        GameItens,
-        message: "Games Encontrados com sucesso"
-    }
     return res.status(200).json(data);
 } catch (error) {
     return res.status(500).json(error.message);
@@ -107,6 +113,26 @@ static async findGameGenre(req, res) {
     return res.status(500).json(error.message);
 }
 }
+
+//Encontrar Jogos
+static async findGames(req, res) {
+    const findGames= req.body;     //Body acha o jogo por nome    
+    try {
+    const GameItens = await database.Game.findAll({
+        where:{
+            name:{[Op.like]: '%'+findGames.name+'%'  }             
+        }
+    });
+    const data = {
+        GameItens,
+        message: "Games Encontrados com sucesso"
+    }
+    return res.status(200).json(data);
+} catch (error) {
+    return res.status(500).json(error.message);
+}}
+
+
 }
 
 module.exports = GameController;

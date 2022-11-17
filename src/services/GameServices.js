@@ -17,11 +17,17 @@ class GameServices extends Services {
       where: { id_game: id_game 
       }});
   }
+
+  async getRegisterName(name) {
+    return database[this.nameModel].findAll({ 
+      where: { name: name
+      }});
+  }
   async updateRegister(date,id_game) {
     return database[this.nameModel].update(date,{ 
       where: { id_game: id_game 
       }});
-  }
+  } 
 
   async deleteRegister(id_game) {
     return database[this.nameModel].destroy({ 

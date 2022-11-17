@@ -13,7 +13,11 @@ class Services {
     return database[this.nameModel].findAll();
   }
 
-  async getRegister(id) {
+  async getRegisterID(id) {
+    return database[this.nameModel].findOne({ where: { id: id }});
+  }
+
+  async getRegisterName(id) {
     return database[this.nameModel].findOne({ where: { id: id }});
   }
 
