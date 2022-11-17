@@ -15,6 +15,10 @@ class PurchaceServices extends Services {
     return database[this.nameModel].findOne({ where: { id_purchase: id_purchase }});
   }
 
+  async getAllRegisters() {
+    return database[this.nameModel].findAll();
+  }
+
 }
 
 module.exports = PurchaceServices;
