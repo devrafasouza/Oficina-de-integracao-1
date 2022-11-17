@@ -27,7 +27,7 @@ module.exports = async (req, res, next) => {
       next();
       if(!user) {
         return res.status(404).json({ mensagem: "Usuario não existe na base de dados"});
-      }
+      } 
     } catch (error) {
       return res.status(404).json({ mensagem: "Token invalido"});
          
