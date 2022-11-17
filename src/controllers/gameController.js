@@ -1,6 +1,11 @@
 const database = require('../models');
 const { Op } = require("sequelize");
 
+const { DataServices , UserServices, GameServices, PurchaseServices } = require('../services');
+const userServices = new UserServices();
+const gameServices = new GameServices();
+const purchaseServices = new PurchaseServices();
+
 
 class GameController {
 
@@ -8,7 +13,7 @@ class GameController {
 static async registerGame(req, res) {
     const newGame = req.body;    
     try {
-        const game = await database.Game.create(newGame); /* cria um novo jogo no banco com o metodo create do sequelize */
+        const game = await gameServices.createRegister(newGame); /* cria um novo jogo no banco com o metodo create do sequelize */
         const data = {
             game,
             message: "Game cadastrado com sucesso"
