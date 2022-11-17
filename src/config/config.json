@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "adm1a",
-    "database": "keyvault",
+    "password": "admin",
+    "database": "projetodalojinhadejogos",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
