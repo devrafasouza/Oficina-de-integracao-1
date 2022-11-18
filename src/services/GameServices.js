@@ -10,37 +10,27 @@ class GameServices extends Services {
 
   async createRegister(newGame) {
     return database[this.nameModel].create(newGame); 
-
   }  
-  async getRegister(info) {
-    return database[this.nameModel].findOne({ 
-      where: {[Op.or]: [{id_game: info}, {name: info}]
-      }});
-  }
-
-  async getRegisterName(name) {
-    return database[this.nameModel].findAll({ 
-      where: { name: name
-      }});
-  }
-  async updateRegister(date,id_game) {
-    return database[this.nameModel].update(date,{ 
-      where: { id_game: id_game 
+  async updateRegister(info,id_game) {
+    return database[this.nameModel].update(info,{ 
+      where: { id_game: id_game
       }});
   } 
-
+  async getAllRegisters(info) {
+    return database[this.nameModel].findAll({
+    where:{name:{[Op.like]:'%'+info+'%' 
+  }}});
+  } 
+  async getRegisterID(info) {
+    return database[this.nameModel].findOne({ 
+      where:{[Op.or]:[{id_game:info},{name: info}]
+      }});
+  } 
   async deleteRegister(id_game) {
     return database[this.nameModel].destroy({ 
       where: { id_game: id_game 
       }});
   }
-
-  async getAllRegister(id_game) {
-    return database[this.nameModel].findAll({ 
-      where: { id_game: id_game 
-      }});
-  }
-
 }
 
 module.exports = GameServices;

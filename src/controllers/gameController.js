@@ -9,7 +9,7 @@ const gameServices = new GameServices();
 
 class GameController {
 
-  //Registrar Jogo  
+//Registrar Jogo  
 static async registerGame(req, res) {
     const newGame = req.body;    
     try {
@@ -23,8 +23,7 @@ static async registerGame(req, res) {
         return res.status(500).json(error.message); //"Falha ao inserir Game");
     }
 }
-
-    //Atualizar Jogo
+//Atualizar Jogo
 static async updateGame(req, res) { 
     const updateGame = req.body;   
         try {
@@ -38,6 +37,48 @@ static async updateGame(req, res) {
         return res.status(500).json(error.message);
     }
 }
+//Encontrar Jogos
+static async searchGames(req, res) {
+    const info = req.body;//Body acha o jogo por nome    
+    try {
+    const resultGames = await gameServices.getAllRegisters(info.name);
+    const data = {
+        resultGames,
+        message: "Games Encontrados com sucesso"
+    }
+    return res.status(200).json(data);
+} catch (error) {
+    return res.status(500).json(error.message);
+}}
+
+//Encontrar Jogo Especifico #ID
+static async searchGameId(req, res) {
+    const info= req.body;
+    try {
+    const resultGame = await gameServices.getRegister(info.id)
+        const data = {
+            resultGame,
+            message: "Game Encontrado com sucesso"
+        }
+    return res.status(200).json(data);
+} catch (error) {
+    return res.status(500).json(error.message);
+}}
+
+//Encontrar Jogo Especifico #Name
+static async searchGameName(req, res) {
+    const findGame= req.body;
+    try {
+    const findGameItem = await gameServices.getRegisterName(findGame.name)
+        const data = {
+            findGameItem,
+            message: "Game Encontrado com sucesso"
+        }
+    return res.status(200).json(data);
+} catch (error) {
+    return res.status(500).json(error.message);
+}}
+
     //Desativar Jogo
 static async inactivateGame(req, res) { 
     const statusGame = req.body;   
@@ -70,33 +111,6 @@ static async deleteGame(req, res) {
 
 
 
-//Encontrar Jogo Especifico ID
-static async findGameID(req, res) {
-    const findGame= req.body;
-    try {
-    const findGameItem = await gameServices.getRegister(findGame.id_game)
-        const data = {
-            findGameItem,
-            message: "Game Encontrado com sucesso"
-        }
-    return res.status(200).json(data);
-} catch (error) {
-    return res.status(500).json(error.message);
-}}
-
-//Encontrar Jogo Especifico Name
-static async findGameName(req, res) {
-    const findGame= req.body;
-    try {
-    const findGameItem = await gameServices.getRegisterName(findGame.name)
-        const data = {
-            findGameItem,
-            message: "Game Encontrado com sucesso"
-        }
-    return res.status(200).json(data);
-} catch (error) {
-    return res.status(500).json(error.message);
-}}
 
 //Encontrar Jogos por Genero
 static async findGameGenre(req, res) {
@@ -117,23 +131,7 @@ static async findGameGenre(req, res) {
 }
 }
 
-//Encontrar Jogos
-static async findGames(req, res) {
-    const findGames= req.body;     //Body acha o jogo por nome    
-    try {
-    const GameItens = await database.Game.findAll({
-        where:{
-            name:{[Op.like]: '%'+findGames.name+'%'  }             
-        }
-    });
-    const data = {
-        GameItens,
-        message: "Games Encontrados com sucesso"
-    }
-    return res.status(200).json(data);
-} catch (error) {
-    return res.status(500).json(error.message);
-}}
+
 
 
 }
