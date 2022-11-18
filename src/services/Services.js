@@ -1,4 +1,5 @@
 const database = require('../models');
+const { Op } = require("sequelize");
 
 /* 1- O importante da camada de services é desacoplar responsabilidades, para uma melhor logibilidade e manutenção do codigo */
 
@@ -8,28 +9,24 @@ class Services {
   constructor(nameModel){
     this.nameModel = nameModel;
   }
-
-  async getAllRegisters() {
-    return database[this.nameModel].findAll();
-  }
-
-  async getRegister(id) {
-    return database[this.nameModel].findOne({ where: { id: id }});
-  }
-
-  async createRegister(date) {
-    return database[this.nameModel].create(date); /* cria um novo usuario no banco com o metodo create do sequelize */
-
-  }
-
-  async updateRegister(date, id) {
+  async createRegister(info) {
+    return database[this.nameModel].create(info); 
+  }  
+  async updateRegister(info, id) {
     return database[this.nameModel]
-      .update(date, { where: { id: id }}); /* atualiza as informações de um usuario com as novas informações */
+      .update(info, { where: { id: id }}); 
   }
-
+  async getAllRegisters(info) {
+    return database[this.nameModel].findAll({
+    where:{name:{[Op.like]:'%'+info+'%' }}});
+  }               
+  async getRegister(info) {
+    return database[this.nameModel].findOne({
+       where:{[Op.or]:[{id_game:info},{name: info}]}});       
+  }
   async deleteRegister(id) {
     return database[this.nameModel]
-      .destroy({ where: { id: id }});
+      .destroy({ where: { id:id }});
   }
 
 }

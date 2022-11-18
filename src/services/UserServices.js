@@ -27,14 +27,14 @@ class UserServices extends Services {
 
   async createToken(userValidId) {
     return jsonwebtoken.sign({}, "5f4dcc3b5aa765d61d8327deb882cf99", {
-      subject: String(userValidId),
+      subject: String(userValidId.id_user),
       expiresIn: "1d"
   });
 
   }
 
-  async loginUser(email, password) {
-    return database[this.nameModel].findOne({where: {email: email}})
+  async loginUser(email) {
+    return database[this.nameModel].findOne({ where: { email: email }})
 
 
   }
