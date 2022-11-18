@@ -2,9 +2,7 @@ const database = require('../models');
 const { Op } = require("sequelize");
 
 const {GameServices} = require('../services');
-
 const gameServices = new GameServices();
-
 
 
 class GameController {
@@ -67,9 +65,9 @@ static async searchGameId(req, res) {
 
 //Encontrar Jogo Especifico #Name
 static async searchGameName(req, res) {
-    const findGame= req.body;
+    const info= req.body;
     try {
-    const findGameItem = await gameServices.getRegisterName(findGame.name)
+    const findGameItem = await gameServices.getRegister(info.name)
         const data = {
             findGameItem,
             message: "Game Encontrado com sucesso"
@@ -78,21 +76,6 @@ static async searchGameName(req, res) {
 } catch (error) {
     return res.status(500).json(error.message);
 }}
-
-    //Desativar Jogo
-static async inactivateGame(req, res) { 
-    const statusGame = req.body;   
-        try {
-        const game = await gameServices.updateRegister(statusGame,statusGame.id_game);
-            const data = {
-                game,
-                message: "Game Desativado com sucesso"
-            }         
-                return res.status(200).json(data);
-    } catch (error) {
-        return res.status(500).json(error.message);
-    }
-}
 
 //Deletar Jogo   //Problema de FK
 static async deleteGame(req, res) {
@@ -108,32 +91,6 @@ static async deleteGame(req, res) {
         return res.status(500).json(error.message);
     }
 }
-
-
-
-
-//Encontrar Jogos por Genero
-static async findGameGenre(req, res) {
-    const findGameGenre = req.body; //Body acha o jogo por nome
-    try {
-    const GameItens = await database.Genre.findAll({
-        where:{
-            id_genre:{ [Op.ne]:findGameGenre.id_genre  }            
-        },include:database.Game
-    });
-    const data = {
-        GameItens,
-        message: "Games Encontrados por Genero com sucesso"
-    }
-    return res.status(200).json(data);
-} catch (error) {
-    return res.status(500).json(error.message);
-}
-}
-
-
-
-
 }
 
 module.exports = GameController;
