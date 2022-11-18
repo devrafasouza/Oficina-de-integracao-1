@@ -21,7 +21,7 @@ class GameServices extends Services {
     where:{name:{[Op.like]:'%'+info+'%' 
   }}});
   } 
-  async getRegisterID(info) {
+  async getRegister(info) {
     return database[this.nameModel].findOne({ 
       where:{[Op.or]:[{id_game:info},{name: info}]
       }});

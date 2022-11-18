@@ -11,7 +11,7 @@ class Services {
   }
   async createRegister(info) {
     return database[this.nameModel].create(info); 
-  }
+  }  
   async updateRegister(info, id) {
     return database[this.nameModel]
       .update(info, { where: { id: id }}); 

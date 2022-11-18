@@ -79,9 +79,9 @@ static async searchGameName(req, res) {
 
 //Deletar Jogo   //Problema de FK
 static async deleteGame(req, res) {
-    const deleteGame = req.body;    
+    const info = req.body;    
         try {
-        const deleteGameItem = await gameServices.deleteRegister(deleteGame.id_game);
+        const deleteGameItem = await gameServices.deleteRegister(info.id_game);
             const data = {
                 deleteGameItem,        
                 message: "Game Deletado com sucesso"
