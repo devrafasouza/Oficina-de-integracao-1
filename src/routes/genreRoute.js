@@ -1,16 +1,17 @@
 const { Router } = require('express');
-const GenreController = require('../controllers/GameController');
+const GenreController = require('../controllers/GenreController');
 
 const router = Router();
 
 router.post('/registerGenre', GenreController.registerGenre); // Rota de registro de novo jogo
-/*router.patch('/updateGame', GameController.updateGame); // Rota para atualizar informações do jogo
-router.get('/searchGames', GameController.searchGames); // Rota de Busca de Jogos
-router.get('/searchGameId', GameController.searchGameId); // Rota de Busca de Jogo #Id
+router.patch('/updateGenre', GenreController.updateGenre); // Rota para atualizar informações do jogo
+router.get('/searchGenres', GenreController.searchGenres); // Rota de Busca de Jogos
+router.delete('/deleteGenre', GenreController.deleteGenre); // Rota de exclusão de jogo*/
+/*router.get('/searchGameId', GameController.searchGameId); // Rota de Busca de Jogo #Id
 router.get('/searchGameName', GameController.searchGameName); // Rota de Busca de Jogo #Nome
 //router.get('/searchGameName', GameController.searchGameGenre); // Rota de Busca de Jogo #Genero
-router.delete('/deleteGame', GameController.deleteGame); // Rota de exclusão de jogo*/
 
+*/
 
 
 module.exports = router;

@@ -22,20 +22,6 @@ static async registerGame(req, res) {
         return res.status(500).json(error.message); //"Falha ao inserir Game");
     }
 }
-
-static async registerGenre(req, res) {
-    const newGenre = req.body;    
-    try {
-        const genre = await genreServices.createRegister(newGenre); /* cria um novo jogo no banco com o metodo create do sequelize */
-        const data = {
-            genre,
-            message: "Game cadastrado com sucesso"
-        }
-        return res.status(200).json(data);
-    } catch (error) {
-        return res.status(500).json(error.message); //"Falha ao inserir Game");
-    }
-}
 //Atualizar Jogo
 static async updateGame(req, res) { 
     const updateGame = req.body;   
