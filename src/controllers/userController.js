@@ -1,7 +1,8 @@
-const { UserServices, GameServices, PurchaseServices } = require('../services');
+const { UserServices, GameServices, PurchaseServices , Services } = require('../services');
 const userServices = new UserServices();
 const gameServices = new GameServices();
 const purchaseServices = new PurchaseServices();
+const services = new Services();
 
 class UserController {
     static async registerUser(req, res) {
@@ -50,7 +51,7 @@ class UserController {
         const { id_game } = req.body;
 
         try {
-            const userPurchase = await userServices.getRegister(id_user);
+            const userPurchase = await userServices.getRegister("id_user", id_user);
             const gameValid = await gameServices.getRegister(id_game);
             const newPurchase = {
                 id_game: gameValid.id_game,
@@ -61,7 +62,11 @@ class UserController {
 
             const data = {
                 game: gameValid,
-                message: "Compra realizada com sucesso"
+                purchase: {
+                    id: purchase.id_purchase,
+                    date: purchase.date
+                },
+                message: "Compra realizada com sucesso",
             }
 
             return res.status(200).json(data);
@@ -78,15 +83,57 @@ class UserController {
             //const userWallet = await userServices.getRegister(id_user);
             const userPurchases = await purchaseServices.getAllRegisters();
 
-            const data = {
-               
-            }
+           
 
             return res.status(200).json("teste");
 
         } catch (error) {
             return res.status(500).json(error);
         }
+    }
+
+    static async changeUser(req, res) {
+        const { id_user } = req.params;
+        const { name } = req.body;
+
+        try {
+            const user = await userServices.getRegister("id_user", id_user);
+            const userUpdated = {
+                ...user
+            }
+            userUpdated.name = name;
+            await userServices.updatedUser(userUpdated, Number(id_user)); 
+
+            const data = {
+                message: "Nome alterado com sucesso",
+                newName: name,
+
+            }
+            return res.status(200).json(data);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+    static async recoveryAccountSendEmail(req, res) {
+        const { email } = req.body;
+
+        const data = {
+            receiver: email,
+            message: {
+                tittle: "Recuperação de conta 'KeyVault 🗝️' ✔",
+                text: "Para recuperar sua conta acesse o link no corpo da mensagem",
+                html: "<a>www.keyvault.com.br</a>",
+            } 
+        }
+        
+            const userValid = await userServices.getRegister("email", data.receiver)
+            if(userValid){
+                const email = await services.sendEmail(data);
+                return res.status(200).json(email);
+            }
+            return res.status(500).json("Email invalido!");
+
     }
 
 }
