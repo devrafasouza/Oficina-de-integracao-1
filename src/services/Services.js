@@ -1,4 +1,5 @@
 const database = require('../models');
+const nodemailer = require('nodemailer');
 
 /* 1- O importante da camada de services é desacoplar responsabilidades, para uma melhor logibilidade e manutenção do codigo */
 
@@ -30,6 +31,30 @@ class Services {
   async deleteRegister(id) {
     return database[this.nameModel]
       .destroy({ where: { id: id }});
+  }
+
+  async sendEmail(data) {
+    try {
+      var transport = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        auth: {
+          user: "KeyVaultRecovery@gmail.com",
+          pass: "dzscptxqfdsvrvts"
+        }
+      });
+  
+      let info = await transport.sendMail({
+        from: '<KeyVaultRecovery@gmail.com', 
+        to: data.receiver, 
+        subject: data.message.tittle, 
+        text: data.message.body, 
+        html: data.message.html, 
+      });
+      return "Email enviado com sucesso";
+    } catch (error) {
+      return `Email não enviado com sucesso ${error}`;
+    }
   }
 
 }
