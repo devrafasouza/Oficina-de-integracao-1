@@ -3,7 +3,6 @@ const database = require('../models');
 const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
 
-
 class UserServices extends Services {
   constructor(){
     super('User');
@@ -39,8 +38,13 @@ class UserServices extends Services {
 
   }
 
-  async getRegister(id_user) {
-    return database[this.nameModel].findOne({ where: { id_user: id_user }});
+  async getRegister(column, data) {
+    return database[this.nameModel].findOne({ where: { [column]: data }});
+  }
+
+  async updatedUser(userUpdated, id_user) {
+    return database[this.nameModel]
+      .update(userUpdated, { where: {id_user: id_user}}); /* atualiza as informações de um usuario com as novas informações */
   }
 
 
