@@ -11,6 +11,7 @@ class GenreServices extends Services {
   async createRegister(newGenre) {
     return database[this.nameModel].create(newGenre);
   }
+  
   async getRegister(info) {
     return database[this.nameModel].findOne({
       where: {[Op.or]: [{id_genre: info}, {name: info}]

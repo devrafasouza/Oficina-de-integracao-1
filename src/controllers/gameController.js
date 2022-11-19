@@ -1,8 +1,9 @@
 const database = require('../models');
 const { Op } = require("sequelize");
 
-const {GameServices} = require('../services');
-const gameServices = new GameServices();
+const {GenreServices} = require('../services');
+
+const genreServices = new GenreServices();
 
 
 class GameController {
@@ -14,6 +15,20 @@ static async registerGame(req, res) {
         const game = await gameServices.createRegister(newGame); /* cria um novo jogo no banco com o metodo create do sequelize */
         const data = {
             game,
+            message: "Game cadastrado com sucesso"
+        }
+        return res.status(200).json(data);
+    } catch (error) {
+        return res.status(500).json(error.message); //"Falha ao inserir Game");
+    }
+}
+
+static async registerGenre(req, res) {
+    const newGenre = req.body;    
+    try {
+        const genre = await genreServices.createRegister(newGenre); /* cria um novo jogo no banco com o metodo create do sequelize */
+        const data = {
+            genre,
             message: "Game cadastrado com sucesso"
         }
         return res.status(200).json(data);
