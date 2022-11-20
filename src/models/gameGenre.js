@@ -4,9 +4,7 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class GameGenre extends Model {
-
     }
-
     GameGenre.init({
       id_game: {
         type: DataTypes.INTEGER,
@@ -16,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      name:{
+        type: DataTypes.STRING,
+        allowNull:false
+      }
     }, {
         sequelize,
         modelName: 'GameGenre',

@@ -1,9 +1,9 @@
 const database = require('../models');
 const { Op } = require("sequelize");
 
-const {GenreServices} = require('../services');
+const {GameServices} = require('../services');
 
-const genreServices = new GenreServices();
+const gameServices = new GameServices();
 
 
 class GameController {
@@ -12,7 +12,7 @@ class GameController {
 static async registerGame(req, res) {
     const newGame = req.body;    
     try {
-        const game = await genreServices.createRegister(newGame); /* cria um novo jogo no banco com o metodo create do sequelize */
+        const game = await gameServices.createRegister(newGame); /* cria um novo jogo no banco com o metodo create do sequelize */
         const data = {
             game,
             message: "Game cadastrado com sucesso"
@@ -26,7 +26,7 @@ static async registerGame(req, res) {
 static async updateGame(req, res) { 
     const updateGame = req.body;   
         try {
-        const game = await genreServices.updateRegister(updateGame,updateGame.id_game);
+        const game = await gameServices.updateRegister(updateGame,updateGame.id_game);
             const data = {
                 game,
                 message: "Game Atualizado com sucesso"
@@ -40,7 +40,7 @@ static async updateGame(req, res) {
 static async searchGames(req, res) {
     const info = req.body;//Body acha o jogo por nome    
     try {
-    const resultGames = await genreServices.getAllRegisters(info.name);
+    const resultGames = await gameServices.getAllRegisters(info.name);
     const data = {
         resultGames,
         message: "Games Encontrados com sucesso"
@@ -54,7 +54,7 @@ static async searchGames(req, res) {
 static async searchGameId(req, res) {
     const info= req.body;
     try {
-    const resultGame = await genreServices.getRegister(info.id)
+    const resultGame = await gameServices.getRegister(info.id)
         const data = {
             resultGame,
             message: "Game Encontrado com sucesso"
@@ -68,7 +68,21 @@ static async searchGameId(req, res) {
 static async searchGameName(req, res) {
     const info= req.body;
     try {
-    const findGameItem = await genreServices.getRegister(info.name)
+    const findGameItem = await gameServices.getRegister(info.name)
+        const data = {
+            findGameItem,
+            message: "Game Encontrado com sucesso"
+        }
+    return res.status(200).json(data);
+} catch (error) {
+    return res.status(500).json(error.message);
+}}
+
+//Encontrar Jogo Especifico #Genero
+static async searchGameGenre(req, res) {
+    const info= req.body;
+    try {
+    const findGameItem = await gameServices.getRegisterCross(info.id_genre)
         const data = {
             findGameItem,
             message: "Game Encontrado com sucesso"
@@ -82,7 +96,7 @@ static async searchGameName(req, res) {
 static async deleteGame(req, res) {
     const info = req.body;    
         try {
-        const deleteGameItem = await genreServices.deleteRegister(info.id_game);
+        const deleteGameItem = await gameServices.deleteRegister(info.id_game);
             const data = {
                 deleteGameItem,        
                 message: "Game Deletado com sucesso"

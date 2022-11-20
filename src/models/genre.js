@@ -26,6 +26,6 @@ module.exports = (sequelize, DataTypes) => {
         updatedAt: false,
         freezeTableName: true,
         createdAt: false,
-    });
+    });    
     return Genre;
 };

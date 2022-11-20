@@ -2,6 +2,7 @@
 const {
     Model
 } = require('sequelize');
+const gameGameMode = require('./gameGameMode');
 module.exports = (sequelize, DataTypes) => {
     class Game extends Model {
       static associate(models) {
@@ -15,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
         Game.hasMany(models.Game_gamemode), {};
       }
     }
-
     Game.init({
         id_game: {
           type: DataTypes.INTEGER,
@@ -47,7 +47,8 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.BOOLEAN,
           allowNull: false,
           defaultValue:true,
-        },
+        }      
+        
     }, {
         sequelize,
         modelName: 'Game',
@@ -57,3 +58,4 @@ module.exports = (sequelize, DataTypes) => {
     });
     return Game;
 };
+

@@ -12,7 +12,6 @@ class UserServices extends Services {
 
   async createRegister(newUser) {
     return database[this.nameModel].create(newUser); /* cria um novo usuario no banco com o metodo create do sequelize */
-
   }
 
   async hashPassword(newUser) {
