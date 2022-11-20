@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         id_game: {
           type: DataTypes.INTEGER,
           allowNull: false,
+          foreignKey: 'id_game',
         },
         type: {
             type: DataTypes.STRING,
