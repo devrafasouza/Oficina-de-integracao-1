@@ -8,9 +8,16 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     GameSystemRequirements.init({
+
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey :true,
+          },
         id_game: {
           type: DataTypes.INTEGER,
           allowNull: false,
+          foreignKey: 'id_game',
         },
         type: {
             type: DataTypes.STRING,
@@ -55,5 +62,7 @@ module.exports = (sequelize, DataTypes) => {
         freezeTableName: true,
         createdAt: false,
     });
+
+    
     return GameSystemRequirements;
 };

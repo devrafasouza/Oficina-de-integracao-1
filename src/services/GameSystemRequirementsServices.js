@@ -10,11 +10,14 @@ class GameSystemRequirementsServices extends Services {
     return database[this.nameModel].create(newGameSystemRequirements);
 
   }
-
-  async getRegister(GameSystemRequirements.id_game) {
-    return database[this.nameModel].findOne({ where: { id_game: id_game }});
-  }
+/*
+  async getRegister(info) {
+    return database[this.nameModel].findOne({ 
+      where:{[Op.or]:[{id_game:info},{name: info}]
+      }});
 
 }
+*/
 
+}
 module.exports = GameSystemRequirementsServices;

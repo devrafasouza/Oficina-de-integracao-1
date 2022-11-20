@@ -1,11 +1,11 @@
 const Services = require('./Services.js');
 const database = require('../models');
 const { Op } = require("sequelize");
-const gameGenre= require('../models')
 
-class GameServices extends Services {
+
+class GameGenreServices extends Services {
   constructor(){
-    super('Game');
+    super('GameGenre');
   }
 
   async createRegister(newGame) {
@@ -43,4 +43,4 @@ class GameServices extends Services {
   }
 }
 
-module.exports = GameServices;
+module.exports = GameGenreServices;
