@@ -3,7 +3,8 @@ const cors = require('cors')
 const user = require('./userRoute'); /* rotas de usuarios */
 const game = require('./gameRoute')
 const genre = require('./genreRoute')
-const gameSystemRequirements = require('./GameSystemRequirementsRoute')
+const gameSystemRequirements = require('./gameSystemRequirementsRoute')
+const image= require('./gameImageRoute')
 
 
 module.exports = app => {
@@ -12,5 +13,6 @@ module.exports = app => {
   app.use(user); /* Chama as rotas de usuario para o app */
   app.use(game);
   app.use(genre);
+  app.use(image);
   app.use(gameSystemRequirements);
 }

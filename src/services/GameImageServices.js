@@ -12,15 +12,15 @@ class GameImageServices extends Services {
     return database[this.nameModel].create(newGameImage);
   }
 
-  async updateRegister(gameImage.id_game) {
-    return database[this.nameModel].update(gameImage.id_game,{
-      where: { id_game: id_game
+  async updateRegister(gameImage) {
+    return database[this.nameModel].update(gameImage,{
+      where: { id_game: gameImage.id_game
       }});
   }
 
-  async deleteRegister(gameImage.id_game) {
-    return database[this.nameModel].destroy(gameImage.id_game,{
-     where: { id_game: id_game
+  async deleteRegister(gameImage) {
+    return database[this.nameModel].destroy({
+     where: { id_game: gameImage
   }});
 }
 }

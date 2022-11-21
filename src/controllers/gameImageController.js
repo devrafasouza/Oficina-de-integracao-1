@@ -12,7 +12,7 @@ static async registerGameImage(req, res) {
     try {
     const GameImage = await gameImageServices.createRegister(newGameImage)
         const data = {
-            gameImage,
+            GameImage,
             message: "Imagem cadastrada com sucesso"
         }
     return res.status(200).json(data);
@@ -25,7 +25,7 @@ static async deleteGameImage(req, res) {
         try {
         const GameImage = await gameServices.deleteRegister(GameImage.id_game);
             const data = {
-                gameImage,
+                GameImage,
                 message: "Imagem Deletada com sucesso"
             }
         return res.status(200).json(data);
@@ -39,7 +39,7 @@ static async updateGameImage(req, res) {
         try {
         const GameImage = await gameServices.updateRegister(GameImage.id_game);
             const data = {
-                gameImage,
+                GameImage,
                 message: "Imagem Atualizada com sucesso"
             }
               return res.status(200).json(data);
