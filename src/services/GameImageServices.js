@@ -3,30 +3,25 @@ const database = require('../models');
 const { Op } = require("sequelize");
 
 
-class GenreServices extends Services {
+class GameImageServices extends Services {
   constructor(){
-    super('Genre');
+    super('GameImage');
   }
 
-  async createRegister(newGenre) {
-    return database[this.nameModel].create(newGenre);
+  async createRegister(newGameImage) {
+    return database[this.nameModel].create(newGameImage);
   }
 
-  async updateRegister(info,id_genre) {
-    return database[this.nameModel].update(info,{ 
-      where: { id_genre: id_genre
+  async updateRegister(gameImage.id_game) {
+    return database[this.nameModel].update(gameImage.id_game,{
+      where: { id_game: id_game
       }});
-  } 
-  async getAllRegisters(info) {
-    return database[this.nameModel].findAll({
-    where:{name:{[Op.like]:'%'+info+'%' 
-  }}});
-}
+  }
 
-  async deleteRegister(id_genre) {
-    return database[this.nameModel].destroy({ 
-     where: { id_genre: id_genre 
+  async deleteRegister(gameImage.id_game) {
+    return database[this.nameModel].destroy(gameImage.id_game,{
+     where: { id_game: id_game
   }});
 }
 }
-module.exports = GenreServices;
+module.exports = GameImageServices;
