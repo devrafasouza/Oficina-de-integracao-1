@@ -1,6 +1,7 @@
 const database = require('../models');
 const { Op } = require("sequelize");
 const nodemailer = require('nodemailer');
+const Genre= require('../models/gameGenre')
 
 /* 1- O importante da camada de services é desacoplar responsabilidades, para uma melhor logibilidade e manutenção do codigo */
 
@@ -20,7 +21,20 @@ class Services {
   async getAllRegisters(info) {
     return database[this.nameModel].findAll({
     where:{name:{[Op.like]:'%'+info+'%' }}});
-  }               
+  }
+  async getRegisterCross(info) {
+    const { Genre } = ('../models');
+    return database[this.nameModel].findAll({
+    where:{name:{[Op.like]:'%'+info+'%' 
+  }},
+  include: {
+      model: Genre 
+      //where: {
+      //  language_id: {$col: 'Catalog.language_id'}
+      //}
+  }
+})};
+                
   async getRegister(info) {
     return database[this.nameModel].findOne({
        where:{[Op.or]:[{id_game:info},{name: info}]}});       

@@ -37,7 +37,7 @@ static async updateGenre(req, res) {
 }
 
 static async searchGenre(req, res) {
-    const genre = req.body;//Body acha o jogo por nome    
+    const genre = req.body;
     try {
     const resultGenres = await genreServices.getAllRegisters(genre.name);
     const data = {
