@@ -49,6 +49,21 @@ static async searchGames(req, res) {
 } catch (error) {
     return res.status(500).json(error.message);
 }}
+//Encontrar Jogos Full
+static async searchGamesAll(req, res) {
+    const info = req.body;//Body acha o jogo por nome  
+    const { Genre } = require('../models');;
+    //const { id_game } = req.body;  
+    try {
+    const resultGames = await gameServices.getRegisterCross(info.name);
+    const data = {
+        resultGames,
+        message: "GamesInfos Encontrados com sucesso"
+    }
+    return res.status(200).json(data);
+} catch (error) {
+    return res.status(500).json(error.message);
+}}
 
 //Encontrar Jogo Especifico #ID
 static async searchGameId(req, res) {
@@ -78,19 +93,7 @@ static async searchGameName(req, res) {
     return res.status(500).json(error.message);
 }}
 
-//Encontrar Jogo Especifico #Genero
-static async searchGameGenre(req, res) {
-    const info= req.body;
-    try {
-    const findGameItem = await gameServices.getRegisterCross(info.id_genre)
-        const data = {
-            findGameItem,
-            message: "Game Encontrado com sucesso"
-        }
-    return res.status(200).json(data);
-} catch (error) {
-    return res.status(500).json(error.message);
-}}
+
 
 //Deletar Jogo   //Problema de FK
 static async deleteGame(req, res) {
