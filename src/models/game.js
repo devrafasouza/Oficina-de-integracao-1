@@ -47,8 +47,8 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.BOOLEAN,
           allowNull: false,
           defaultValue:true,
-        }      
-        
+        }
+
     }, {
         sequelize,
         modelName: 'Game',
@@ -58,4 +58,3 @@ module.exports = (sequelize, DataTypes) => {
     });
     return Game;
 };
-

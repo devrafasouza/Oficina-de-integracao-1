@@ -63,6 +63,6 @@ module.exports = (sequelize, DataTypes) => {
         createdAt: false,
     });
 
-    
+
     return GameSystemRequirements;
 };

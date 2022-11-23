@@ -83,7 +83,7 @@ class UserController {
             //const userWallet = await userServices.getRegister(id_user);
             const userPurchases = await purchaseServices.getAllRegisters();
 
-           
+
 
             return res.status(200).json("teste");
 
@@ -102,7 +102,7 @@ class UserController {
                 ...user
             }
             userUpdated.name = name;
-            await userServices.updatedUser(userUpdated, Number(id_user)); 
+            await userServices.updatedUser(userUpdated, Number(id_user));
 
             const data = {
                 message: "Nome alterado com sucesso",
@@ -124,9 +124,9 @@ class UserController {
                 tittle: "Recuperação de conta 'KeyVault 🗝️' ✔",
                 text: "Para recuperar sua conta acesse o link no corpo da mensagem",
                 html: "<a>www.keyvault.com.br</a>",
-            } 
+            }
         }
-        
+
             const userValid = await userServices.getRegister("email", data.receiver)
             if(userValid){
                 const email = await services.sendEmail(data);
@@ -139,4 +139,3 @@ class UserController {
 }
 
 module.exports = UserController;
-

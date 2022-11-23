@@ -8,7 +8,7 @@ const gameSystemRequirements = new GameSystemRequirementsServices();
 class GameSystemRequirementsController {
 
 static async registerGameSystemRequirements(req, res) {
-    const newGameSystemRequirements = req.body;    
+    const newGameSystemRequirements = req.body;
      try {
         const GameSystemRequirements = await gameSystemRequirements.createRegister(newGameSystemRequirements); /* cria um novo jogo no banco com o metodo create do sequelize */
         const data = {
@@ -22,14 +22,14 @@ static async registerGameSystemRequirements(req, res) {
 }
 /*
     //Atualizar Genre
-static async updateGenre(req, res) { 
-    const updateGenre = req.body;   
+static async updateGenre(req, res) {
+    const updateGenre = req.body;
         try {
         const genre = await genreServices.updateRegister(updateGenre,updateGenre.id_genre);
             const data = {
                 genre,
                 message: "Genero Atualizado com sucesso"
-            }         
+            }
               return res.status(200).json(data);
         } catch (error) {
             return res.status(500).json(error.message);
@@ -37,7 +37,7 @@ static async updateGenre(req, res) {
 }
 
 static async searchGenres(req, res) {
-    const genre = req.body;//Body acha o jogo por nome    
+    const genre = req.body;//Body acha o jogo por nome
     try {
     const resultGenres = await genreServices.getAllRegisters(genre.name);
     const data = {
@@ -50,19 +50,19 @@ static async searchGenres(req, res) {
 }}
 
 static async deleteGenre(req, res) {
-    const genreDelete = req.body;    
+    const genreDelete = req.body;
         try {
         const deleteGenreItem = await genreServices.deleteRegister(genreDelete.id_genre);
             const data = {
-                deleteGenreItem,        
+                deleteGenreItem,
                 message: "Genre Deletado com sucesso"
-            }       
+            }
         return res.status(200).json(data);
     } catch (error) {
         return res.status(500).json(error.message);
     }
 }
-  */  
+  */
 }
 
 module.exports = GameSystemRequirementsController;

@@ -8,9 +8,9 @@ const gameServices = new GameServices();
 
 class GameController {
 
-//Registrar Jogo  
+//Registrar Jogo
 static async registerGame(req, res) {
-    const newGame = req.body;    
+    const newGame = req.body;
     try {
         const game = await gameServices.createRegister(newGame); /* cria um novo jogo no banco com o metodo create do sequelize */
         const data = {
@@ -23,14 +23,14 @@ static async registerGame(req, res) {
     }
 }
 //Atualizar Jogo
-static async updateGame(req, res) { 
-    const updateGame = req.body;   
+static async updateGame(req, res) {
+    const updateGame = req.body;
         try {
         const game = await gameServices.updateRegister(updateGame,updateGame.id_game);
             const data = {
                 game,
                 message: "Game Atualizado com sucesso"
-            }         
+            }
               return res.status(200).json(data);
     } catch (error) {
         return res.status(500).json(error.message);
@@ -38,7 +38,7 @@ static async updateGame(req, res) {
 }
 //Encontrar Jogos
 static async searchGames(req, res) {
-    const info = req.body;//Body acha o jogo por nome    
+    const info = req.body;//Body acha o jogo por nome
     try {
     const resultGames = await gameServices.getAllRegisters(info.name);
     const data = {
@@ -94,13 +94,13 @@ static async searchGameGenre(req, res) {
 
 //Deletar Jogo   //Problema de FK
 static async deleteGame(req, res) {
-    const info = req.body;    
+    const info = req.body;
         try {
         const deleteGameItem = await gameServices.deleteRegister(info.id_game);
             const data = {
-                deleteGameItem,        
+                deleteGameItem,
                 message: "Game Deletado com sucesso"
-            }       
+            }
         return res.status(200).json(data);
     } catch (error) {
         return res.status(500).json(error.message);
@@ -109,4 +109,3 @@ static async deleteGame(req, res) {
 }
 
 module.exports = GameController;
-

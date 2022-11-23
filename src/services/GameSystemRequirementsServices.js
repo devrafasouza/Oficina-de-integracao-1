@@ -12,7 +12,7 @@ class GameSystemRequirementsServices extends Services {
   }
 /*
   async getRegister(info) {
-    return database[this.nameModel].findOne({ 
+    return database[this.nameModel].findOne({
       where:{[Op.or]:[{id_game:info},{name: info}]
       }});
 

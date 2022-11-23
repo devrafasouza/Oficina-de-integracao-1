@@ -7,10 +7,10 @@ class PurchaceServices extends Services {
   }
 
   async createRegister(newPurchase) {
-    return database[this.nameModel].create(newPurchase); 
+    return database[this.nameModel].create(newPurchase);
 
   }
-  
+
   async getRegister(id_purchase) {
     return database[this.nameModel].findOne({ where: { id_purchase: id_purchase }});
   }

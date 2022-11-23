@@ -22,7 +22,7 @@ static async searchGameGenero(req, res) {
 }}
 
 
-    
+
 }
 
 module.exports = GenreController;

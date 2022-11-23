@@ -6,6 +6,7 @@ const GenreServices = require('./GenreServices.js');
 const GameImageServices = require('./GameImageServices.js');
 const GameSystemRequirementsServices = require('./GameSystemRequirementsServices.js');
 const GameGenreServices = require('./GameGenreServices.js');
+const LanguageServices = require('./LanguageServices.js');
 
 module.exports = {
   UserServices,
@@ -16,5 +17,6 @@ module.exports = {
   GameImageServices,
   GameSystemRequirementsServices,
   GameGenreServices,
+  LanguageServices,
 
 }

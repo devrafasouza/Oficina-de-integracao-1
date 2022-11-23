@@ -11,19 +11,19 @@ class Services {
     this.nameModel = nameModel;
   }
   async createRegister(info) {
-    return database[this.nameModel].create(info); 
-  }  
+    return database[this.nameModel].create(info);
+  }
   async updateRegister(info, id) {
     return database[this.nameModel]
-      .update(info, { where: { id: id }}); 
+      .update(info, { where: { id: id }});
   }
   async getAllRegisters(info) {
     return database[this.nameModel].findAll({
     where:{name:{[Op.like]:'%'+info+'%' }}});
-  }               
+  }
   async getRegister(info) {
     return database[this.nameModel].findOne({
-       where:{[Op.or]:[{id_game:info},{name: info}]}});       
+       where:{[Op.or]:[{id_game:info},{name: info}]}});
   }
   async deleteRegister(id) {
     return database[this.nameModel]
@@ -40,13 +40,13 @@ class Services {
           pass: "dzscptxqfdsvrvts"
         }
       });
-  
+
       let info = await transport.sendMail({
-        from: '<KeyVaultRecovery@gmail.com', 
-        to: data.receiver, 
-        subject: data.message.tittle, 
-        text: data.message.body, 
-        html: data.message.html, 
+        from: '<KeyVaultRecovery@gmail.com',
+        to: data.receiver,
+        subject: data.message.tittle,
+        text: data.message.body,
+        html: data.message.html,
       });
       return "Email enviado com sucesso";
     } catch (error) {

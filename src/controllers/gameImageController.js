@@ -35,7 +35,7 @@ static async deleteGameImage(req, res) {
 }
 
 static async updateGameImage(req, res) {
-    const updateGameImage = req.body;   
+    const updateGameImage = req.body;
         try {
         const GameImage = await gameServices.updateRegister(GameImage.id_game);
             const data = {
