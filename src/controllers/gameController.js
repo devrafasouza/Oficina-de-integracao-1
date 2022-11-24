@@ -55,7 +55,7 @@ static async searchGamesAll(req, res) {
     const info = req.body;     
     try {
     const resultGames = await gameServices.getAllRegisters(info.name)
-    const genre = await genreServices.getAllRegisters(resultGames.id_game);
+    const genre = await genreServices.getAllRegistersGenre(resultGames.id_game);
     const data = {
         //resultGames,
         genre,        

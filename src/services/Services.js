@@ -22,8 +22,8 @@ class Services {
     return database[this.nameModel].findAll({
     where:{[Op.or]:[{name:{[Op.like]:'%'+info+'%' }},{id_game:info}]
   }
-  });
-  } 
+  });}
+   
   async getAllRegistersGenre(info) {
     return database[this.nameModel].findAll({
     where:{id_game:info  }

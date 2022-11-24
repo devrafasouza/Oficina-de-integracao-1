@@ -13,10 +13,8 @@ module.exports = (sequelize, DataTypes) => {
           foreignKey: 'id_plataform',
           constraint: true,
         };
-
       }
     }
-
     Game_platform.init({
         id_game: {
           type: DataTypes.INTEGER,
