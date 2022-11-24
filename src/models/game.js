@@ -2,7 +2,7 @@
 const {
     Model
 } = require('sequelize');
-const gameGameMode = require('./gameGameMode');
+
 module.exports = (sequelize, DataTypes) => {
     class Game extends Model {
       static associate(models) {

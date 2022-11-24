@@ -1,7 +1,7 @@
 const database = require('../models');
 const { Op } = require("sequelize");
 const nodemailer = require('nodemailer');
-const Genre= require('../models/gameGenre')
+
 
 /* 1- O importante da camada de services é desacoplar responsabilidades, para uma melhor logibilidade e manutenção do codigo */
 
