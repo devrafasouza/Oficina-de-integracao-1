@@ -43,12 +43,12 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.BOOLEAN,
           allowNull: false,
         },
-        gameActive: {
+        isGameActive: {
           type: DataTypes.BOOLEAN,
           allowNull: false,
           defaultValue:true,
         },  
-        pyblisher:{
+        publisher:{
           type :DataTypes.STRING,
           allowNull: true,
         },   
