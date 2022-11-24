@@ -10,15 +10,23 @@ class GameController {
 
 //Registrar Jogo  
 static async registerGame(req, res) {
-    const newGame = req.body; 
-    const newGame_Genre = req.body;  
+    const newGame = req.body;     
+    console.log(newGame.isDiscountActive); 
     try {
-        const game = await gameServices.createRegister(newGame);
-        const game_genre = await game_genreServices.createRegister(game.id_game,newGame_Genre);
-
+        const game = await gameServices.createRegister(newGame);        
+        
+        const id_genre= newGame.id_genre
+        const id_game= game.id_game        
+        const Game= {             
+            id_genre,
+            id_game
+        }  
+        
+        console.log(game); 
+        //const newGame_Genre = await game_genreServices.createRegister(Game);
+        
         const data = {
-            game,
-            game_genre,
+            Game,
             message: "Game cadastrado com sucesso"
         }
         return res.status(200).json(data);
