@@ -2,8 +2,9 @@ const database = require('../models');
 const { Op } = require("sequelize");
 
 const {GameServices} = require('../services');
-
+const {GenreServices} = require('../services');
 const gameServices = new GameServices();
+const genreServices = new GenreServices();
 
 
 class GameController {
@@ -51,13 +52,13 @@ static async searchGames(req, res) {
 }}
 //Encontrar Jogos Full
 static async searchGamesAll(req, res) {
-    const info = req.body;//Body acha o jogo por nome  
-    const { Genre } = require('../models');;
-    //const { id_game } = req.body;  
+    const info = req.body;     
     try {
-    const resultGames = await gameServices.getRegisterCross(info.name);
+    const resultGames = await gameServices.getAllRegisters(info.name)
+    const genre = await genreServices.getAllRegisters(resultGames.id_game);
     const data = {
-        resultGames,
+        //resultGames,
+        genre,        
         message: "GamesInfos Encontrados com sucesso"
     }
     return res.status(200).json(data);

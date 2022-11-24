@@ -19,23 +19,11 @@ class GameServices extends Services {
   } 
   async getAllRegisters(info) {
     return database[this.nameModel].findAll({
-    where:{name:{[Op.like]:'%'+info+'%' 
-  }}});
-  } 
-  async getRegisterCross(info) {
-    const { Genre } = ('../models');
-    //const { id_game } = req.body; 
-    return database[this.nameModel].findAll({
-    where:{name:{[Op.like]:'%'+info+'%' 
-  }},
-  include: {
-      model: Game, 
-      where: {
-        id_game: {$col: 'Game.id_game'}
-      }
+    where:{[Op.or]:[{name:{[Op.like]:'%'+info+'%' }},{id_game:info}]
   }
-})};
-   
+  });
+  } 
+       
   async getRegister(info) {
     return database[this.nameModel].findOne({ 
       where:{[Op.or]:[{id_game:info},{name: info}]
