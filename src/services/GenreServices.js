@@ -5,7 +5,7 @@ const { Op } = require("sequelize");
 
 class GenreServices extends Services {
   constructor(){
-    super('Genre');
+    super('Game_Genre');
   }
 
   async createRegister(newGenre) {
