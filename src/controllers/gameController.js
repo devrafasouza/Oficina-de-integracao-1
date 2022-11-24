@@ -14,7 +14,7 @@ static async registerGame(req, res) {
     const newGame_Genre = req.body;  
     try {
         const game = await gameServices.createRegister(newGame);
-        const game_genre = await game_genreServices.createRegister(newGame_Genre);  
+        const game_genre = await game_genreServices.createRegister(game.id_game,newGame_Genre);
 
         const data = {
             game,
@@ -26,6 +26,8 @@ static async registerGame(req, res) {
         return res.status(500).json(error.message);
     }
 }
+
+
 //Atualizar Jogo
 static async updateGame(req, res) { 
     const updateGame = req.body;   
