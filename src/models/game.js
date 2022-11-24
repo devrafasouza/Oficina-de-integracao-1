@@ -47,8 +47,19 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.BOOLEAN,
           allowNull: false,
           defaultValue:true,
-        }      
-        
+        },  
+        pyblisher:{
+          type :DataTypes.STRING,
+          allowNull: true,
+        },   
+        releaseDate:{
+          type: DataTypes.DATEONLY,
+          allowNull: false,              
+        },
+        developer:{
+          type :DataTypes.STRING,
+          allowNull: true,
+        }            
     }, {
         sequelize,
         modelName: 'Game',
