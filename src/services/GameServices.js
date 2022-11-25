@@ -10,7 +10,9 @@ class GameServices extends Services {
   }
 
   async createRegister(newGame) {
+    
     return database[this.nameModel].create(newGame); 
+
   }  
   async updateRegister(info,id_game) {
     return database[this.nameModel].update(info,{ 

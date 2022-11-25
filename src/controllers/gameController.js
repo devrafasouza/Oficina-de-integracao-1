@@ -10,8 +10,9 @@ class GameController {
 
 //Registrar Jogo  
 static async registerGame(req, res) {
-    const newGame = req.body;     
-    console.log(newGame.isDiscountActive); 
+    const newGame = req.body; 
+
+    //console.log(newGame.isDiscountActive); 
     try {
         const game = await gameServices.createRegister(newGame);        
         
@@ -21,12 +22,11 @@ static async registerGame(req, res) {
         const Game = {
             id_game,
             id_genre          
-        }
-        
+        }        
         const newGame_Genre = await gameGenreServices.createRegister(Game);
         
         const data = {
-            newGame_Genre,
+            newGame_Genre,   
             message: "Game cadastrado com sucesso"
         }
         return res.status(200).json(data);
