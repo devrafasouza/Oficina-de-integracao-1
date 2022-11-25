@@ -5,7 +5,7 @@ const { Op } = require("sequelize");
 
 class GenreServices extends Services {
   constructor(){
-    super('Game_Genre');
+    super('Genre');
   }
 
   async createRegister(newGenre) {
@@ -13,19 +13,13 @@ class GenreServices extends Services {
   }
 
   async updateRegister(info,id_genre) {
-    return database[this.nameModel].update(info,{
+    return database[this.nameModel].update(info,{ 
       where: { id_genre: id_genre
       }});
-  }
-  async getAllRegisters(info) {
-    return database[this.nameModel].findAll({
-    where:{name:{[Op.like]:'%'+info+'%'
-  }}});
-}
-
+  }     
   async deleteRegister(id_genre) {
-    return database[this.nameModel].destroy({
-     where: { id_genre: id_genre
+    return database[this.nameModel].destroy({ 
+     where: { id_genre: id_genre 
   }});
 }
 }

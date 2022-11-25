@@ -2,65 +2,74 @@ const database = require('../models');
 const { Op } = require("sequelize");
 
 const {GameServices} = require('../services');
-const {GenreServices} = require('../services');
+const {Game_GenreServices} = require('../services');
 const gameServices = new GameServices();
-const genreServices = new GenreServices();
-
+const game_genreServices = new Game_GenreServices();
 
 class GameController {
 
-//Registrar Jogo
+//Registrar Jogo  
 static async registerGame(req, res) {
-    const newGame = req.body;
+    const newGame = req.body;     
+    console.log(newGame.isDiscountActive); 
     try {
-        const game = await gameServices.createRegister(newGame); /* cria um novo jogo no banco com o metodo create do sequelize */
+        const game = await gameServices.createRegister(newGame);        
+        
+        const id_genre= newGame.id_genre
+        const id_game= game.id_game
+        
+        const Game = {
+            id_game,
+            id_genre          
+        }
+        
+        const newGame_Genre = await game_genreServices.createRegister(Game);
+        
         const data = {
-            game,
+            newGame_Genre,
             message: "Game cadastrado com sucesso"
         }
         return res.status(200).json(data);
     } catch (error) {
-        return res.status(500).json(error.message); //"Falha ao inserir Game");
+        return res.status(500).json(error.message);
     }
 }
+
+
 //Atualizar Jogo
-static async updateGame(req, res) {
-    const updateGame = req.body;
+static async updateGame(req, res) { 
+    const updateGame = req.body;   
         try {
         const game = await gameServices.updateRegister(updateGame,updateGame.id_game);
             const data = {
                 game,
                 message: "Game Atualizado com sucesso"
-            }
+            }         
               return res.status(200).json(data);
     } catch (error) {
         return res.status(500).json(error.message);
     }
 }
-//Encontrar Jogos
-static async searchGames(req, res) {
-    const info = req.body;//Body acha o jogo por nome
+//Encontrar Jogos ID
+static async searchGamesName(req, res) {
+    const info = req.body;
     try {
     const resultGames = await gameServices.getAllRegisters(info.name);
     const data = {
         resultGames,
-        message: "Games Encontrados com sucesso"
-    }
+        message: "Games Encontrados com sucesso"    }
     return res.status(200).json(data);
 } catch (error) {
     return res.status(500).json(error.message);
 }}
-//Encontrar Jogos Full
-static async searchGamesAll(req, res) {
-    const info = req.body;     
+//Encontrar Jogos Name
+static async searchGamesId(req, res) {
+    const info = req.body;
     try {
-    const resultGames = await gameServices.getAllRegisters(info.name)
-    const genre = await genreServices.getAllRegistersGenre(resultGames.id_game);
+    const resultGames = await gameServices.getAllRegisters(info.id);
     const data = {
-        //resultGames,
-        genre,        
-        message: "GamesInfos Encontrados com sucesso"
-    }
+        resultGames,
+        message: "Games Encontrados com sucesso"    }
     return res.status(200).json(data);
 } catch (error) {
     return res.status(500).json(error.message);
@@ -96,15 +105,20 @@ static async searchGameName(req, res) {
 
 
 
+
+
+
+
+
 //Deletar Jogo   //Problema de FK
 static async deleteGame(req, res) {
-    const info = req.body;
+    const info = req.body;    
         try {
         const deleteGameItem = await gameServices.deleteRegister(info.id_game);
             const data = {
-                deleteGameItem,
+                deleteGameItem,        
                 message: "Game Deletado com sucesso"
-            }
+            }       
         return res.status(200).json(data);
     } catch (error) {
         return res.status(500).json(error.message);
@@ -112,4 +126,6 @@ static async deleteGame(req, res) {
 }
 }
 
+
 module.exports = GameController;
+
