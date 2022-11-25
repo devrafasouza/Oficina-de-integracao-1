@@ -7,6 +7,7 @@ const gameSystemRequirements = require('./gameSystemRequirementsRoute')
 const image = require('./gameImageRoute')
 const language = require('./languageRoute')
 const platform = require('./platform')
+const gameMode = require('./gameMode')
 
 
 module.exports = app => {
@@ -19,4 +20,5 @@ module.exports = app => {
   app.use(gameSystemRequirements);
   app.use(language);
   app.use(platform);
+  app.use(gameMode);
 }
