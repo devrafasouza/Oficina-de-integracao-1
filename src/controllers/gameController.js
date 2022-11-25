@@ -16,17 +16,17 @@ static async registerGame(req, res) {
         const game = await gameServices.createRegister(newGame);        
         
         const id_genre= newGame.id_genre
-        const id_game= game.id_game        
-        const Game= {             
-            id_genre,
-            id_game
-        }  
+        const id_game= game.id_game
         
-        console.log(game); 
-        //const newGame_Genre = await game_genreServices.createRegister(Game);
+        const Game = {
+            id_game,
+            id_genre          
+        }
+        
+        const newGame_Genre = await game_genreServices.createRegister(Game);
         
         const data = {
-            Game,
+            newGame_Genre,
             message: "Game cadastrado com sucesso"
         }
         return res.status(200).json(data);

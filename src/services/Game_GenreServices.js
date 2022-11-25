@@ -7,9 +7,10 @@ class Game_GenreServices extends Services {
   constructor(){
     super('Game_Genre');
   }
-  async createRegister(info) {    
-    return database[this.nameModel].create(info);
-  }
-  
+
+  async createRegister(NewGame) {
+    return database[this.nameModel].create(NewGame); 
+  } 
+
 }
 module.exports = Game_GenreServices;
