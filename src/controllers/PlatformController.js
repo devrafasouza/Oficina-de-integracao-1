@@ -12,13 +12,14 @@ static async registerPlatform(req, res) {
     const newPlatform = req.body;
     try {
         const platform = await platformServices.createRegister(newPlatform);
-            platform,
+           const data={ platform,
             message: "Plataforma cadastrada com sucesso"
         }
         return res.status(200).json(data);
     } catch (error) {
         return res.status(500).json(error.message);
     }
+}
 
 static async updatePlatform(req, res) {
     const updatePlatform = req.body;

@@ -2,7 +2,6 @@ const database = require('../models');
 const { Op } = require("sequelize");
 
 const {GameModeServices} = require('../services');
-
 const gameModeServices = new GameModeServices();
 
 
@@ -12,6 +11,7 @@ static async registerGameMode(req, res) {
     const newGameMode = req.body;
     try {
         const gameMode = await gameModeServices.createRegister(newGameMode);
+        const data ={
             gameMode,
             message: "GameMode cadastrada com sucesso"
         }
@@ -19,6 +19,7 @@ static async registerGameMode(req, res) {
     } catch (error) {
         return res.status(500).json(error.message);
     }
+}
 
 static async updateGameMode(req, res) {
     const updateGameMode = req.body;

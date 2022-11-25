@@ -2,7 +2,6 @@ const database = require('../models');
 const { Op } = require("sequelize");
 
 const {LanguageServices} = require('../services');
-
 const languageServices = new LanguageServices();
 
 

@@ -24,7 +24,7 @@ class GameModeServices extends Services {
   }});
 }
 
-async getRegister(id_gamemode) {
+async getRegister(info) {
   return database[this.nameModel].findOne({
     where: {[Op.or]: [{id_gamemode: info}, {name: info}]
     }});

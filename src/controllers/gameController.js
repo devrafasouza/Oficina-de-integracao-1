@@ -2,9 +2,9 @@ const database = require('../models');
 const { Op } = require("sequelize");
 
 const {GameServices} = require('../services');
-const {Game_GenreServices} = require('../services');
+const {GameGenreServices} = require('../services');
 const gameServices = new GameServices();
-const game_genreServices = new Game_GenreServices();
+const gameGenreServices = new GameGenreServices();
 
 class GameController {
 
@@ -23,7 +23,7 @@ static async registerGame(req, res) {
             id_genre          
         }
         
-        const newGame_Genre = await game_genreServices.createRegister(Game);
+        const newGame_Genre = await gameGenreServices.createRegister(Game);
         
         const data = {
             newGame_Genre,
@@ -52,9 +52,9 @@ static async updateGame(req, res) {
 }
 //Encontrar Jogos ID
 static async searchGamesName(req, res) {
-    const info = req.body;
+    const game = req.body;
     try {
-    const resultGames = await gameServices.getAllRegisters(info.name);
+    const resultGames = await gameServices.getAllRegisters(game.name);
     const data = {
         resultGames,
         message: "Games Encontrados com sucesso"    }
@@ -102,13 +102,6 @@ static async searchGameName(req, res) {
 } catch (error) {
     return res.status(500).json(error.message);
 }}
-
-
-
-
-
-
-
 
 //Deletar Jogo   //Problema de FK
 static async deleteGame(req, res) {

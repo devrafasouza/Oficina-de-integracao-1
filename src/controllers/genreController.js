@@ -35,15 +35,31 @@ static async updateGenre(req, res) {
             return res.status(500).json(error.message);
     }
 }
-
-static async searchGenre(req, res) {
+static async searchGenreName(req, res) {
     const genre = req.body;
     try {
+       
     const resultGenres = await genreServices.getAllRegisters(genre.name);
     const data = {
         resultGenres,
         message: "Games Encontrados com sucesso"
     }
+    
+    return res.status(200).json(data);
+} catch (error) {
+    return res.status(500).json(error.message);
+}}
+
+static async searchGenreId(req, res) {
+    const genre = req.body;
+    try {
+       
+    const resultGenres = await genreServices.getAllRegisters(genre.id_genre);
+    const data = {
+        resultGenres,
+        message: "Games Encontrados com sucesso"
+    }
+    
     return res.status(200).json(data);
 } catch (error) {
     return res.status(500).json(error.message);
