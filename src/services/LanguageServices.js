@@ -12,15 +12,15 @@ class LanguageServices extends Services {
     return database[this.nameModel].create(newLanguage);
 
   }
-  async getRegister(info) {
+  async getRegister(id_language) {
     return database[this.nameModel].findOne({
-      where: {[Op.or]: [{id_Language: info}, {name: info}]
+      where: {[Op.or]: [{id_Language: info}, {ptBR_name: info}]
       }});
   }
 
-  async getRegisterName(name) {
+  async getRegisterptBR_Name(ptBR_name) {
     return database[this.nameModel].findAll({
-      where: { name: name
+      where: { ptBR_name: ptBR_name
       }});
   }
   async updateRegister(date,id_language) {

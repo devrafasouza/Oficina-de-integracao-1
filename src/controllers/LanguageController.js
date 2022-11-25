@@ -36,11 +36,11 @@ static async updateLanguage(req, res) {
         return res.status(500).json(error.message);
     }
 }
-//Encontrar Linguagem
+//Encontrar todas Linguagens
 static async searchLanguage(req, res) {
-    const info = req.body;//Body acha a linguagem por nome
+    const info = req.body;
     try {
-    const resultLanguage = await languageServices.getAllRegisters(info.name);
+    const resultLanguage = await languageServices.getAllRegisters(info.id_language);
     const data = {
         resultLanguage,
         message: "Linguagens Encontradas com sucesso"
@@ -54,7 +54,7 @@ static async searchLanguage(req, res) {
 static async searchLanguageId(req, res) {
     const info= req.body;
     try {
-    const resultLanguage = await languageServices.getRegister(info.id)
+    const resultLanguage = await languageServices.getRegister(info.id_language)
         const data = {
             resultLanguage,
             message: "Linguagem Encontrada com sucesso"
@@ -64,14 +64,14 @@ static async searchLanguageId(req, res) {
     return res.status(500).json(error.message);
 }}
 
-//Encontrar Linguagem Especifica #Name
-static async searchGameName(req, res) {
+//Encontrar Linguagem Especifica #ptBR_name
+static async searchLanguageptBR_Name(req, res) {
     const info= req.body;
     try {
-    const findLanguageItem = await languageServices.getRegister(info.name)
+    const findLanguageItem = await languageServices.getRegister(info.ptBR_name)
         const data = {
             findLanguageItem,
-            message: "Linguagem Encontrada com sucesso"
+            message: "Linguagem pt br Encontrada com sucesso"
         }
     return res.status(200).json(data);
 } catch (error) {

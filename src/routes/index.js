@@ -6,6 +6,7 @@ const genre = require('./genreRoute')
 const gameSystemRequirements = require('./gameSystemRequirementsRoute')
 const image = require('./gameImageRoute')
 const language = require('./languageRoute')
+const platform = require('./platform')
 
 
 module.exports = app => {
@@ -17,4 +18,5 @@ module.exports = app => {
   app.use(image);
   app.use(gameSystemRequirements);
   app.use(language);
+  app.use(platform);
 }
