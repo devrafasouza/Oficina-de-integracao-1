@@ -15,12 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       };
       }
     }
-    Game_genre.init({
-      id_gamegenre: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey:true
-      },
+    Game_genre.init({     
       id_game: {
         type: DataTypes.INTEGER,
         allowNull: false,
