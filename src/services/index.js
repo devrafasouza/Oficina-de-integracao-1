@@ -3,7 +3,7 @@ const Services = require('./Services.js');
 const PurchaseServices = require('./PurchaseServices.js');
 const GameServices = require('./GameServices.js');
 const GenreServices = require('./GenreServices.js');
-const GameGenreServices = require('./GameGenreServices.js');
+const Game_GenreServices = require('./Game_GenreServices.js');
 const GameModeServices = require('./GameModeServices.js');
 const LanguageServices = require('./LanguageServices.js');
 const PlatformServices = require('./PlatformServices.js');
@@ -14,7 +14,7 @@ module.exports = {
   PurchaseServices,
   GameServices,
   GenreServices,
-  GameGenreServices,
+  Game_GenreServices,
   GameModeServices,
   LanguageServices,
   PlatformServices

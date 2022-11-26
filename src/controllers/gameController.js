@@ -2,9 +2,10 @@ const database = require('../models');
 const { Op } = require("sequelize");
 
 const {GameServices} = require('../services');
-const {GameGenreServices} = require('../services');
+const {Game_GenreServices} = require('../services');
+
 const gameServices = new GameServices();
-const gameGenreServices = new GameGenreServices();
+const gameGenreServices = new Game_GenreServices();
 
 class GameController {
 
@@ -22,7 +23,9 @@ static async registerGame(req, res) {
         const Game = {
             id_game,
             id_genre          
-        }        
+        }   
+        
+        console.log(Game);
         const newGame_Genre = await gameGenreServices.createRegister(Game);
         
         const data = {
