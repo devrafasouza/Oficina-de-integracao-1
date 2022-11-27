@@ -2,34 +2,20 @@ const database = require('../models');
 const { Op } = require("sequelize");
 
 const {GameServices} = require('../services');
-const {Game_GenreServices} = require('../services');
+//const {Game_GenreServices} = require('../services');
 
 const gameServices = new GameServices();
-const gameGenreServices = new Game_GenreServices();
+//const gameGenreServices = new Game_GenreServices();
 
 class GameController {
 
 //Registrar Jogo  
 static async registerGame(req, res) {
-    const newGame = req.body; 
-
-    //console.log(newGame.isDiscountActive); 
+    const info = req.body; 
     try {
-        const game = await gameServices.createRegister(newGame);        
-        
-        const id_genre= newGame.id_genre
-        const id_game= game.id_game
-        
-        const Game = {
-            id_game,
-            id_genre          
-        }   
-        
-        console.log(Game);
-        const newGame_Genre = await gameGenreServices.createRegister(Game);
-        
-        const data = {
-            newGame_Genre,   
+        const newGame = await gameServices.createRegister(info);      
+            const data = {
+            newGame,   
             message: "Game cadastrado com sucesso"
         }
         return res.status(200).json(data);
@@ -37,7 +23,6 @@ static async registerGame(req, res) {
         return res.status(500).json(error.message);
     }
 }
-
 
 //Atualizar Jogo
 static async updateGame(req, res) { 

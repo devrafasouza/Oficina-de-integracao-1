@@ -7,6 +7,8 @@ const port = 3000;
 routes(app); /* recebe as rotas e inicializa o express */
 
 
+
+
 app.listen(port, () => console.log(`Servidor rodando na porta ${port}-Funcionou!`));
 
 

@@ -31,6 +31,10 @@ class GameServices extends Services {
       }
     });
   } 
+  async getRegisterPK(info) {
+    return database[this.nameModel].findByPk(info);
+      }  
+  
     async deleteRegister(id_game) {
     return database[this.nameModel].destroy({ 
       where: { id_game: id_game 

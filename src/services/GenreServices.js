@@ -16,7 +16,10 @@ class GenreServices extends Services {
     return database[this.nameModel].update(info,{ 
       where: { id_genre: id_genre
       }});
-  }    
+  }   
+  async getRegisterPK(info) {
+    return database[this.nameModel].findByPk(info);
+      }   
 
   async getAllRegisters(info) {
     return database[this.nameModel].findAll({

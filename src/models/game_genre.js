@@ -8,10 +8,12 @@ module.exports = (sequelize, DataTypes) => {
         Game_genre.belongsTo(models.Game), {
             foreignKey: 'id_game',
             constraint: true,
+            as:"GeneroGame"
         };
         Game_genre.belongsTo(models.Genre), {
           foreignKey: 'id_genre',
           constraint: true,
+          as:"GameGenre"
       };
       }
     }

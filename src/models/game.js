@@ -5,6 +5,7 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
     class Game extends Model {
+      
       static associate(models) {
         Game.hasMany(models.Purchase), {};
         Game.hasMany(models.Cart_item), {};
@@ -69,5 +70,6 @@ module.exports = (sequelize, DataTypes) => {
         createdAt: false,
     });
     return Game;
+
 };
 

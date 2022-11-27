@@ -1,15 +1,15 @@
 const bodyParser = require('body-parser');
 const cors = require('cors')
 const user = require('./userRoute'); /* rotas de usuarios */
-//
-const game = require('./gameRoute')
-const genre = require('./genreRoute')
-const gameGenre = require('./gameRoute')
-//
-
 const gameMode = require('./gameModeRoute')
 const language = require('./languageRoute')
 const platform = require('./platformRoute')
+//
+const game = require('./gameRoute')
+//
+const genre = require('./genreRoute')
+const gameGenre = require('./gameRoute')
+//
 
 
 module.exports = app => {
