@@ -18,17 +18,22 @@ class Game_GenreController {
        const { id_game } = req.params;  
        const info = req.body;       
         try {
-            //const NewGame = await gameServices.createRegister(info);
-            
+
             const game = await gameServices.getRegisterPK(id_game);
             const genre = await genreServices.getRegisterPK(info.id_genre);
+            //const NewGame = await gameServices.createRegister(info);
+           const infoFull={            
+                game,
+                genre                
+            }
+            
             
         
                 if(!game || !genre){
                 return res.status(400).json({error:"Game ou Genero não existe"});
                 }
-        
-        const newGameGenre = await game_GenreServices.createRegister(info);                       
+                console.log(game,genre);
+        const newGameGenre = await game_GenreServices.createRegister(infoFull);                       
 
         const data = {                          
                 newGameGenre,   
