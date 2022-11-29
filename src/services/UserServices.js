@@ -15,8 +15,8 @@ class UserServices extends Services {
 
   }
 
-  async hashPassword(newUser) {
-    return bcrypt.hash(newUser.password, 12); /* hash na password com bcrypt */
+  async hashPassword(password) {
+    return bcrypt.hash(password, 12); /* hash na password com bcrypt */
   }
 
   async compareHash(password, userValidPassword) {

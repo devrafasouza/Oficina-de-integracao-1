@@ -45,7 +45,7 @@ class Services {
         from: '<KeyVaultRecovery@gmail.com', 
         to: data.receiver, 
         subject: data.message.tittle, 
-        text: data.message.body, 
+        text: data.message.text, 
         html: data.message.html, 
       });
       return "Email enviado com sucesso";

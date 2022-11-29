@@ -7,13 +7,13 @@ const services = new Services();
 class UserController {
     static async registerUser(req, res) {
         const newUser = req.body;
-        newUser.password = await userServices.hashPassword(newUser, 12);
+        newUser.password = await userServices.hashPassword(newUser.password, 12);
         try {
             const user = await userServices.createRegister(newUser) /* cria um novo usuario no banco com o metodo create do sequelize */
             const data = {
                 user,
                 message: "Usuário cadastrado com sucesso"
-            }
+            };
             return res.status(200).json(data);
         } catch (error) {
             return res.status(500).json(error.message);
@@ -37,7 +37,7 @@ class UserController {
                 user: userValid,
                 token,
                 message: "Usuário logado com sucesso"
-            }
+            };
 
             return res.status(200).json(data);
 
@@ -57,7 +57,7 @@ class UserController {
                 id_game: gameValid.id_game,
                 id_user: userPurchase.id_user,
                 date: new Date()
-            }
+            };
             const purchase = await purchaseServices.createRegister(newPurchase);
 
             const data = {
@@ -67,7 +67,7 @@ class UserController {
                     date: purchase.date
                 },
                 message: "Compra realizada com sucesso",
-            }
+            };
 
             return res.status(200).json(data);
 
@@ -100,7 +100,7 @@ class UserController {
             const user = await userServices.getRegister("id_user", id_user);
             const userUpdated = {
                 ...user
-            }
+            };
             userUpdated.name = name;
             await userServices.updatedUser(userUpdated, Number(id_user)); 
 
@@ -108,7 +108,7 @@ class UserController {
                 message: "Nome alterado com sucesso",
                 newName: name,
 
-            }
+            };
             return res.status(200).json(data);
         } catch (error) {
             return res.status(500).json(error.message);
@@ -117,23 +117,44 @@ class UserController {
 
     static async recoveryAccountSendEmail(req, res) {
         const { email } = req.body;
+        
+        const user = await userServices.getRegister("email", email);
 
         const data = {
             receiver: email,
             message: {
                 tittle: "Recuperação de conta 'KeyVault 🗝️' ✔",
-                text: "Para recuperar sua conta acesse o link no corpo da mensagem",
-                html: "<a>www.keyvault.com.br</a>",
+                text: "Acesse o link para recuperar a conta", 
+                html: `<a>www.keyvault.com.br/recoveryaccount/${user.id_user}</a>`,
             } 
         }
         
-            const userValid = await userServices.getRegister("email", data.receiver)
-            if(userValid){
-                const email = await services.sendEmail(data);
-                return res.status(200).json(email);
-            }
-            return res.status(500).json("Email invalido!");
+        const userValid = await userServices.getRegister("email", data.receiver);
+        if(userValid){
+            const email = await services.sendEmail(data);
+            return res.status(200).json(email);
+            
+        }
+        return res.status(500).json("Email invalido!");
 
+    }
+
+    static async recoveryAccount(req, res) {
+        const { id_user } = req.params;
+        const { password } = req.body;
+
+
+        try {
+            const user = await userServices.getRegister("id_user", id_user);
+            const userUpdated = {
+            ...user
+            } 
+            userUpdated.password = await userServices.hashPassword(password, 12);
+            await userServices.updatedUser(userUpdated, Number(id_user));
+            return res.status(200).json("Senha redefinida com sucesso!") 
+        } catch (error) {
+            return res.status(500).json("Não foi possivel recuperar a conta");
+        }
     }
 
 }
