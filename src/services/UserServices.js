@@ -14,8 +14,8 @@ class UserServices extends Services {
     return database[this.nameModel].create(newUser); /* cria um novo usuario no banco com o metodo create do sequelize */
   }
 
-  async hashPassword(newUser) {
-    return bcrypt.hash(newUser.password, 12); /* hash na password com bcrypt */
+  async hashPassword(password) {
+    return bcrypt.hash(password, 12); /* hash na password com bcrypt */
   }
 
   async compareHash(password, userValidPassword) {
