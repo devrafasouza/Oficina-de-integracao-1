@@ -1,11 +1,14 @@
 'use strict';
+const database = require('../models');
 const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class Genre extends Model {
       static associate(models) {
-        Genre.hasMany(models.Game_genre), {};
+        Genre.hasMany(models.Game_genre);       
+        Genre.belongsToMany(models.Game, { through:'Game_genre' });
+
       }
     }
 

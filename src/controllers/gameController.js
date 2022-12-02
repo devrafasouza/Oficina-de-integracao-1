@@ -63,6 +63,24 @@ static async searchGamesId(req, res) {
     return res.status(500).json(error.message);
 }}
 
+//Encontrar Jogos Genero ID
+static async searchGamesCross(req, res) {
+    //const info = req.body;
+    try {
+    const resultGames = await gameServices.getAllRegisters4();
+    console.log(resultGames);
+    //const resultGames2 = await gameServices.getAllRegisters3();
+    //console.log(resultGames2);
+    /*
+    const data = {
+        resultGames,
+        message: "Games Encontrados com sucesso"    }*/
+
+    return res.status(200).json(resultGames);
+} catch (error) {
+    return res.status(500).json(error.message);
+}}
+
 //Encontrar Jogo Especifico #ID
 static async searchGameId(req, res) {
     const info= req.body;

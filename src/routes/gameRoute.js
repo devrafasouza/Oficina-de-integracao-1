@@ -15,6 +15,7 @@ router.get('/searchGamesId', GameController.searchGamesId); // Rota de Busca de 
 router.post('/registerGame_Genre', GameController.registerGame); // Rota de registro de novo jogo
 
 
+router.get('/searchGamesCross', GameController.searchGamesCross); // Rota de Busca de Jogos
 
 router.get('/searchGameName', GameController.searchGameName); // Rota de Busca de Jogo #Nome
 //router.get('/searchGamesAll', GameController.searchGamesAll); // Rota de Busca de Jogo #Nome

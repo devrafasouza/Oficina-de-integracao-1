@@ -22,7 +22,15 @@ class Services {
     return database[this.nameModel].findAll({
     where:{[Op.or]:[{name:{[Op.like]:'%'+info+'%' }},{id_game:info}]
   }
-  });}               
+  });}
+  
+  async getAllRegisters2() {
+    return database[this.nameModel].findAll({ include: database.Genre });
+  }
+  async getAllRegisters3() {
+    return database[this.nameModel].findAll({ include: database.Game_genre });
+  }
+
   async getRegister(info) {
     return database[this.nameModel].findOne({
        where:{[Op.or]:[{id_game:info},{name: info}]}});       
@@ -54,6 +62,27 @@ class Services {
     } catch (error) {
       return `Email não enviado com sucesso ${error}`;
     }
+  }
+
+  async getAllRegisters4() {
+    return database[this.nameModel].findAll({
+      include: [
+        {
+          model: 'Game_genre',
+          include: [database.Game, database.Genre]
+        },
+        {
+          model:database.Genre,
+          include: {
+            model: database.Game,
+            include: {
+              model: 'Game_genre',
+              include: [database.Game, database.Genre]
+            }
+          }
+        }
+      ]
+    });
   }
 
 }
