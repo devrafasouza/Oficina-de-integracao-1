@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const GameModeController = require('../controllers/GameModeController');
+const GameModeController = require('../controllers/gameModeController');
 
 const router = Router();
 

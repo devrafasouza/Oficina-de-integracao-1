@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const LanguageController = require('../controllers/LanguageController');
+const LanguageController = require('../controllers/languageController');
 
 const router = Router();
 
