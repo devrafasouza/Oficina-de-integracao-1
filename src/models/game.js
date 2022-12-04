@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         name: {
             type: DataTypes.STRING,
-            //unique: true,
+            unique: true,
             allowNull: false,
         },
         description: {
@@ -50,11 +50,6 @@ module.exports = (sequelize, DataTypes) => {
         isDiscountActive: {
           type: DataTypes.BOOLEAN,
           allowNull: false,
-        },
-        isGameActive: {
-          type: DataTypes.BOOLEAN,
-          allowNull: false,
-          defaultValue:true,
         },  
         publisher:{
           type :DataTypes.STRING,
