@@ -5,17 +5,7 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class Game_genre extends Model {
-      static associate(models) {
-        Game_genre.belongsTo(models.Game);
-        Game_genre.belongsTo(models.Genre);
-         
-      models.Genre.belongsToMany(models.Game, { through: 'Game_genre' });
-      models.Game.belongsToMany(models.Genre, { through: 'Game_genre'});
-      Game_genre.belongsTo(models.Game);
-      Game_genre.belongsTo(models.Genre);
-      models.Game.hasMany(models.Game_genre);
-      models.Genre.hasMany(models.Game_genre);
-      }
+      
     }
     Game_genre.init({  
       id_game: {

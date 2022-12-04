@@ -40,36 +40,6 @@ class GameServices extends Services {
       where: { id_game: id_game 
       }});
   }
-
-  async getAllRegisters2() {
-    return database[this.nameModel].findAll({ include: database.Genre.id_genre });
-}
-async getAllRegisters3() {
-  return database[this.nameModel].findAll({ include: database.Game_genre });
-}
-async getAllRegisters4() {
-  return database[this.nameModel].findAll({
-    include: [
-      {
-        model: 'Game_genre',
-        include: [database.Game, database.Genre]
-      },
-      {
-        model:database.Genre,
-        include: {
-          model: database.Game,
-          include: {
-            model: 'Game_genre',
-            include: [database.Game, database.Genre]
-          }
-        }
-      }
-    ]
-  });
-}
-
-
-
 }
 
 module.exports = GameServices;
