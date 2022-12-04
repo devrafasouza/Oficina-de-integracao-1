@@ -11,13 +11,30 @@ class Services {
   constructor(nameModel){
     this.nameModel = nameModel;
   }
+
+  async getAllRegisters(column, data) {
+    return database[this.nameModel].findAll({ where: { [column]: data }});
+  }
+
+  async getRegister(id) {
+    return database[this.nameModel].findOne({ where: { id: id }});
+  }
+
+  async createRegister(date) {
+    return database[this.nameModel].create(date); /* cria um novo usuario no banco com o metodo create do sequelize */
+
+  }
+  /*
   async createRegister(info) {
     return database[this.nameModel].create(info); 
-  }   
+  } 
+  */
   async updateRegister(info, id) {
     return database[this.nameModel]
       .update(info, { where: { id: id }}); 
   }
+
+  /*
   async getAllRegisters(info) {
     return database[this.nameModel].findAll({
     where:{[Op.or]:[{name:{[Op.like]:'%'+info+'%' }},{id_game:info}]
@@ -27,6 +44,7 @@ class Services {
     return database[this.nameModel].findOne({
        where:{[Op.or]:[{id_game:info},{name: info}]}});       
   }
+  */
   async deleteRegister(id) {
     return database[this.nameModel]
       .destroy({ where: { id:id }});

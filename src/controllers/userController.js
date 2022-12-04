@@ -12,7 +12,7 @@ class UserController {
             const user = await userServices.createRegister(newUser) /* cria um novo usuario no banco com o metodo create do sequelize */
             const data = {
                 user,
-                message: "Usuário cadastrado com sucesso"
+                message: "Usuário cadastrado com sucesso!"
             };
             return res.status(200).json(data);
         } catch (error) {
@@ -36,7 +36,7 @@ class UserController {
             const data = {
                 user: userValid,
                 token,
-                message: "Usuário logado com sucesso"
+                message: "Usuário logado com sucesso!"
             };
 
             return res.status(200).json(data);
@@ -52,7 +52,7 @@ class UserController {
 
         try {
             const userPurchase = await userServices.getRegister("id_user", id_user);
-            const gameValid = await gameServices.getRegister(id_game);
+            const gameValid = await gameServices.getRegister("id_game", id_game);
             const newPurchase = {
                 id_game: gameValid.id_game,
                 id_user: userPurchase.id_user,
@@ -66,7 +66,7 @@ class UserController {
                     id: purchase.id_purchase,
                     date: purchase.date
                 },
-                message: "Compra realizada com sucesso",
+                message: "Compra realizada com sucesso!",
             };
 
             return res.status(200).json(data);
@@ -76,16 +76,26 @@ class UserController {
         }
     }
 
-    static async walletUser(req, res) { //Não ta funcionando
+    static async walletUser(req, res) { 
         const { id_user } = req.params;
 
         try {
-            //const userWallet = await userServices.getRegister(id_user);
-            const userPurchases = await purchaseServices.getAllRegisters();
+            const user = await userServices.getRegister("id_user", id_user);
+            const userPurchases = await purchaseServices.getAllRegisters("id_user", user.id_user);
+            const games = await Promise.all(userPurchases.map( async (value) => {
+                return await gameServices.getAllRegisters("id_game", value.id_game);
+                
+            }));
 
-           
+            const data = {
+                name: user.name,
+                userPurchases,
+                games,
+                message: "Carteira do usuario acessada com sucesso!"
+               
+            }
 
-            return res.status(200).json("teste");
+            return res.status(200).json(data);
 
         } catch (error) {
             return res.status(500).json(error);
@@ -105,7 +115,7 @@ class UserController {
             await userServices.updatedUser(userUpdated, Number(id_user)); 
 
             const data = {
-                message: "Nome alterado com sucesso",
+                message: "Nome alterado com sucesso!",
                 newName: name,
 
             };
@@ -153,7 +163,7 @@ class UserController {
             await userServices.updatedUser(userUpdated, Number(id_user));
             return res.status(200).json("Senha redefinida com sucesso!") 
         } catch (error) {
-            return res.status(500).json("Não foi possivel recuperar a conta");
+            return res.status(500).json("Não foi possivel recuperar a conta.");
         }
     }
 

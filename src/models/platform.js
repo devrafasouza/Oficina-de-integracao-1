@@ -5,7 +5,6 @@ const {
 module.exports = (sequelize, DataTypes) => {
     class Platform extends Model {
         static associate(models) {
-            Platform.hasMany(models.Game_platform), {};
           }
     }
 

@@ -19,18 +19,28 @@ class GameServices extends Services {
       where: { id_game: id_game
       }});
   } 
+
+  /*
   async getAllRegisters(info) {
     return database[this.nameModel].findAll({
     where:{[Op.or]:[{name:{[Op.like]:'%'+info+'%' }},{id_game:info}]
   }
   });
-  }        
+  } 
   async getRegister(info) {
     return database[this.nameModel].findOne({ 
       where:{[Op.or]:[{id_game:info},{name: info}]
       }
     });
-  } 
+  } */
+
+  async getRegister(column, data) {
+    return database[this.nameModel].findOne({ where: { [column]: data }});
+  }
+
+  async getAllRegisters(column, data) {
+    return database[this.nameModel].findAll({ where: { [column]: data }});
+  }
   async getRegisterPK(info) {
     return database[this.nameModel].findByPk(info);
       }  

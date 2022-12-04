@@ -5,10 +5,6 @@ const {
 module.exports = (sequelize, DataTypes) => {
     class Game_image extends Model {
       static associate(models) {
-        Game_image.belongsTo(models.Game), {
-            foreignKey: 'id_game',
-            constraint: true,
-        };
       }
     }
 

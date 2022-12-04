@@ -7,14 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     class Game extends Model {
       
       static associate(models) {
-        Game.hasMany(models.Purchase), {};
-        Game.hasMany(models.Cart_item), {};
-        Game.hasMany(models.Game_system_requirements), {};
-        Game.hasMany(models.Game_platform), {};
-        Game.hasMany(models.Game_image), {};
-        Game.hasMany(models.Game_genre), {};
-        Game.hasMany(models.Game_language_support), {};
-        Game.hasMany(models.Game_gamemode), {};
+     
       }
     }
     Game.init({
