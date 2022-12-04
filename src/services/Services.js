@@ -10,8 +10,8 @@ class Services {
     this.nameModel = nameModel;
   }
 
-  async getAllRegisters() {
-    return database[this.nameModel].findAll();
+  async getAllRegisters(column, data) {
+    return database[this.nameModel].findAll({ where: { [column]: data }});
   }
 
   async getRegister(id) {
