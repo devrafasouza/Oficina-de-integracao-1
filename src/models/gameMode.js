@@ -5,7 +5,6 @@ const {
 module.exports = (sequelize, DataTypes) => {
     class Gamemode extends Model {
       static associate(models) {
-        Gamemode.hasMany(models.Game_gamemode), {};
       }
     }
 

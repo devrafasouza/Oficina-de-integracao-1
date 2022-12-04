@@ -5,14 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
     class Purchase extends Model {
       static associate(models) {
-        Purchase.belongsTo(models.User), {
-            constraint: true,
-            foreignKey: 'id_user'
-        };
-        Purchase.belongsTo(models.Game), {
-          constraint: true,
-          foreignKey: 'id_game'
-      };
+
       }
     }
     Purchase.init({
