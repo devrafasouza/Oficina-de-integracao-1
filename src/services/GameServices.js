@@ -11,8 +11,12 @@ class GameServices extends Services {
 
   }
   
-  async getRegister(id_game) {
-    return database[this.nameModel].findOne({ where: { id_game: id_game }});
+  async getRegister(column, data) {
+    return database[this.nameModel].findOne({ where: { [column]: data }});
+  }
+
+  async getAllRegisters(column, data) {
+    return database[this.nameModel].findAll({ where: { [column]: data }});
   }
 
 }
