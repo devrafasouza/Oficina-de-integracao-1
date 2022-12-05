@@ -4,8 +4,7 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class Genre extends Model {
-      
+    class Genre extends Model {      
     }
 
     Genre.init({

@@ -2,37 +2,48 @@ const database = require('../models');
 const { Op } = require("sequelize");
 
 const {GameServices} = require('../services');
+const {GenreServices} = require('../services');
 const {Game_GenreServices} = require('../services');
 
 const gameServices = new GameServices();
+const genreServices = new GenreServices();
 const gameGenreServices = new Game_GenreServices();
 
 class GameController {
 
 //Registrar Jogo  
 static async registerGame(req, res) {
-    const info = req.body; 
-    try {
+   const info=req.body;
+    try { 
         const newGame = await gameServices.createRegister(info);
-        const Game = await gameServices.getRegister(info.name)
+        const genre = await genreServices.getRegister(info.id_genre);       
+        
+        //const gameGenre = await gameGenreServices.getAllRegisters(newGame.id_game);
+        console(genre);
+        //console(newGame.id_game);
+/*
+        const games = await Promise.all(userPurchases.map( async (value) => {
+                return await gameServices.getAllRegisters("id_game", value.id_game);
+                
+            }));
 
+        
+        const id_genre = await genreServices.getRegister("id_genre",info.id_genre);    
+         const gamegenre = await Promise.all(id_genre.map( async (value) => {
+            return await gameServices.getAllRegisters("id_game", value.id_game);            
+       }));*/
 
-        const id_game = Game.id_game;
-        const id_genre=info.id_genre
-        const gameFull ={  
-            id_game,
-            id_genre
-        }
-       console.log(gameFull);
-        const NewGameGenre = await gameGenreServices.createRegister(info.id_game,info.id_genre);     
-            const data = {
+        const data = {        
             newGame,
-            NewGameGenre,   
-            message: "Game cadastrado com sucesso"
+            gamegenre,
+            message: "Carteira do usuario acessada com sucesso!"
+           
         }
-        return res.status(200).json(data);
+
+        return res.status(200).json();
+
     } catch (error) {
-        return res.status(500).json(error.message);
+        return res.status(500).json(error);
     }
 }
 

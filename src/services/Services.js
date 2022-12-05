@@ -25,7 +25,7 @@ class Services {
   });} 
   async getRegister(info) {
     return database[this.nameModel].findOne({
-       where:{[Op.or]:[{id_game:info},{name: info}]}});       
+       where:{[Op.or]:[{id_game:info},{name: info},{id_genre: info}]}});       
   }
   async deleteRegister(id) {
     return database[this.nameModel]
