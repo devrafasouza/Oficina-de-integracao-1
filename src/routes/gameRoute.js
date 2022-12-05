@@ -9,6 +9,7 @@ const GameController = require('../controllers/GameController');
 const router = Router();
 
 router.post('/registerGame', GameController.registerGame); // Rota de registro de novo jogo
+router.post('/registerGameGenre', GameController.registerGameGenre); // Rota de registro de novo jogo
 router.patch('/updateGame', GameController.updateGame); // Rota para atualizar informações do jogo
 router.get('/searchGamesName', GameController.searchGamesName); // Rota de Busca de Jogos
 router.get('/searchGamesId', GameController.searchGamesId); // Rota de Busca de Jogo #Id
