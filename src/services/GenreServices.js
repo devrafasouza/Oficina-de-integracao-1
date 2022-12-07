@@ -19,7 +19,12 @@ class GenreServices extends Services {
   }   
   async getRegisterPK(info) {
     return database[this.nameModel].findByPk(info);
-      }   
+      } 
+
+  async getRegister(info) {
+      return database[this.nameModel].findOne({
+      where:{[Op.or]:[{name: info},{id_genre: info}]}});       
+    } 
 
   async getAllRegisters(info) {
     return database[this.nameModel].findAll({

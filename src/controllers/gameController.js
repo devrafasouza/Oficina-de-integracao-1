@@ -2,27 +2,66 @@ const database = require('../models');
 const { Op } = require("sequelize");
 
 const {GameServices} = require('../services');
-//const {Game_GenreServices} = require('../services');
+const {GenreServices} = require('../services');
+const {Game_GenreServices} = require('../services');
 
 const gameServices = new GameServices();
-//const gameGenreServices = new Game_GenreServices();
+const genreServices = new GenreServices();
+const gameGenreServices = new Game_GenreServices();
 
 class GameController {
 
 //Registrar Jogo  
 static async registerGame(req, res) {
-    const info = req.body; 
-    try {
+   const info=req.body;
+
+    try{
         const newGame = await gameServices.createRegister(info);      
-            const data = {
-            newGame,   
-            message: "Game cadastrado com sucesso"
-        }
+              
+          
+        const data = {       
+         newGame,
+           message: "Relacionamento GameGenre do usuario acessada com sucesso!"
+                   }
+
         return res.status(200).json(data);
+
     } catch (error) {
-        return res.status(500).json(error.message);
-    }
-}
+        return res.status(500).json(error);
+    }}
+
+
+static async registerGameGenre(req, res) {
+    const info=req.body;
+
+        try {  
+         const newGame = await gameServices.getRegister(info.name); 
+         const genre = await genreServices.getRegister(info.id_genre);
+         
+         
+ 
+         const gameid = newGame.id_game
+         const genreid = genre.id_genre
+ 
+         const gameGenre = {        
+            gameid,
+            genreid                      
+         }                                     
+         const newGameGenre = await gameGenreServices.createRegister(gameGenre);           
+         
+         
+           
+         const data = {       
+          newGameGenre,
+            message: "Relacionamento GameGenre do usuario acessada com sucesso!"
+                    }
+ 
+         return res.status(200).json(data);
+ 
+     } catch (error) {
+         return res.status(500).json(error);
+     }
+ }
 
 //Atualizar Jogo
 static async updateGame(req, res) { 
@@ -59,6 +98,24 @@ static async searchGamesId(req, res) {
         resultGames,
         message: "Games Encontrados com sucesso"    }
     return res.status(200).json(data);
+} catch (error) {
+    return res.status(500).json(error.message);
+}}
+
+//Encontrar Jogos Genero ID
+static async searchGamesCross(req, res) {
+    //const info = req.body;
+    try {
+    const resultGames = await gameServices.getAllRegisters4();
+    console.log(resultGames);
+    //const resultGames2 = await gameServices.getAllRegisters3();
+    //console.log(resultGames2);
+    /*
+    const data = {
+        resultGames,
+        message: "Games Encontrados com sucesso"    }*/
+
+    return res.status(200).json(resultGames);
 } catch (error) {
     return res.status(500).json(error.message);
 }}

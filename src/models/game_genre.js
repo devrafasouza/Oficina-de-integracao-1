@@ -1,4 +1,5 @@
 'use strict';
+
 const {
     Model
 } = require('sequelize');
@@ -7,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       static associate(models) {
       }
     }
-    Game_genre.init({     
+    Game_genre.init({  
       id_game: {
         type: DataTypes.INTEGER,
         allowNull: false,

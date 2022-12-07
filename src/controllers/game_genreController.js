@@ -25,10 +25,7 @@ class Game_GenreController {
            const infoFull={            
                 game,
                 genre                
-            }
-            
-            
-        
+            }                    
                 if(!game || !genre){
                 return res.status(400).json({error:"Game ou Genero não existe"});
                 }

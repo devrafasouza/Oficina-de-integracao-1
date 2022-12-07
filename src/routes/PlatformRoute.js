@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const PlatformController = require('../controllers/PlatformController');
+const PlatformController = require('../controllers/platformController');
 
 const router = Router();
 

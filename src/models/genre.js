@@ -1,4 +1,5 @@
 'use strict';
+const database = require('../models');
 const {
     Model
 } = require('sequelize');

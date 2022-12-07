@@ -7,24 +7,16 @@ class Game_GenreServices extends Services {
   constructor(){
     super('Game_Genre');
   }
-/*
-  async createRegister(NewGameGenre) {
-    console.log(NewGameGenre);
-    return database[this.nameModel].create(NewGameGenre); 
-  } 
 
- */ async createRegister(NewGame) {
+  async createRegister(newGameGenre) {
+    
+    return database[this.nameModel].create(newGameGenre); 
 
-  console.log(NewGame);
-  resultado = database[this.nameModel].create(NewGame, {
-    include: [{
-      association: database.Genre,
-      include: [ database.Game ]
-    }]
-  }); 
-
-  console.log(resultado);
-    return resultado;
-
-}}
+  }  
+  async getAllRegisters(info) {
+    return database[this.nameModel].findAll({
+    where:{[Op.or]:[{name:{[Op.like]:'%'+info+'%' }},{id_game:info}]
+  }
+  });} 
+}
 module.exports = Game_GenreServices;
