@@ -48,22 +48,24 @@ static async searchGenreName(req, res) {
     return res.status(200).json(data);
 } catch (error) {
     return res.status(500).json(error.message);
-}}
+}
+}
 
 static async searchGenreId(req, res) {
     const genre = req.body;
     try {
        
-    const resultGenres = await genreServices.getAllRegisters(genre.id_genre);
+    const resultGenre = await genreServices.getRegister(genre.id_genre);
     const data = {
-        resultGenres,
+        resultGenre,
         message: "Games Encontrados com sucesso"
     }
     
     return res.status(200).json(data);
 } catch (error) {
     return res.status(500).json(error.message);
-}}
+}
+}
 
 static async deleteGenre(req, res) {
     const genreDelete = req.body;    
@@ -77,8 +79,7 @@ static async deleteGenre(req, res) {
     } catch (error) {
         return res.status(500).json(error.message);
     }
-}
-    
+}    
 }
 
 module.exports = GenreController;

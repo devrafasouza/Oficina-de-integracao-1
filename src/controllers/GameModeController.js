@@ -35,19 +35,6 @@ static async updateGameMode(req, res) {
     }
 }
 
-static async searchGameMode(req, res) {
-    const info = req.body;
-    try {
-    const resultGameMode = await gameModeServices.getAllRegisters(info.id_gameMode);
-    const data = {
-        resultGameMode,
-        message: "GameModes Encontradas com sucesso"
-    }
-    return res.status(200).json(data);
-} catch (error) {
-    return res.status(500).json(error.message);
-}}
-
 static async searchGameModeId(req, res) {
     const info= req.body;
     try {

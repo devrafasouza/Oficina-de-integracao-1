@@ -35,19 +35,6 @@ static async updatePlatform(req, res) {
     }
 }
 
-static async searchPlatform(req, res) {
-    const info = req.body;
-    try {
-    const resultPlatform = await platformServices.getAllRegisters(info.id_platform);
-    const data = {
-        resultPlatform,
-        message: "Plataformas Encontradas com sucesso"
-    }
-    return res.status(200).json(data);
-} catch (error) {
-    return res.status(500).json(error.message);
-}}
-
 static async searchPlatformId(req, res) {
     const info= req.body;
     try {

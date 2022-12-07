@@ -36,10 +36,7 @@ static async registerGameGenre(req, res) {
 
         try {  
          const newGame = await gameServices.getRegister(info.name); 
-         const genre = await genreServices.getRegister(info.id_genre);
-         
-         
- 
+         const genre = await genreServices.getRegister(info.id_genre);    
          const gameid = newGame.id_game
          const genreid = genre.id_genre
  
@@ -47,10 +44,7 @@ static async registerGameGenre(req, res) {
             gameid,
             genreid                      
          }                                     
-         const newGameGenre = await gameGenreServices.createRegister(gameGenre);           
-         
-         
-           
+         const newGameGenre = await gameGenreServices.createRegister(gameGenre);              
          const data = {       
           newGameGenre,
             message: "Relacionamento GameGenre do usuario acessada com sucesso!"
@@ -77,7 +71,7 @@ static async updateGame(req, res) {
         return res.status(500).json(error.message);
     }
 }
-//Encontrar Jogos ID
+//Encontrar Jogos Name
 static async searchGamesName(req, res) {
     const game = req.body;
     try {
@@ -89,37 +83,6 @@ static async searchGamesName(req, res) {
 } catch (error) {
     return res.status(500).json(error.message);
 }}
-//Encontrar Jogos Name
-static async searchGamesId(req, res) {
-    const info = req.body;
-    try {
-    const resultGames = await gameServices.getAllRegisters(info.id);
-    const data = {
-        resultGames,
-        message: "Games Encontrados com sucesso"    }
-    return res.status(200).json(data);
-} catch (error) {
-    return res.status(500).json(error.message);
-}}
-
-//Encontrar Jogos Genero ID
-static async searchGamesCross(req, res) {
-    //const info = req.body;
-    try {
-    const resultGames = await gameServices.getAllRegisters4();
-    console.log(resultGames);
-    //const resultGames2 = await gameServices.getAllRegisters3();
-    //console.log(resultGames2);
-    /*
-    const data = {
-        resultGames,
-        message: "Games Encontrados com sucesso"    }*/
-
-    return res.status(200).json(resultGames);
-} catch (error) {
-    return res.status(500).json(error.message);
-}}
-
 //Encontrar Jogo Especifico #ID
 static async searchGameId(req, res) {
     const info= req.body;
